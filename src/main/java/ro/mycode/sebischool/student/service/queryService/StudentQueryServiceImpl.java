@@ -38,4 +38,12 @@ public class StudentQueryServiceImpl implements StudentQueryService{
 //        return studentRepository.findByFirstNameAndLastName(firstName,lastName).map(student -> studentMapper.toDto(student));
         return null;
     }
+
+    @Override
+    public List<StudentResponse> getStudentsByFirstName(String firstName) {
+        return studentRepository.findStudentByFirstName(firstName)
+                .stream()
+                .map(s->studentMapper.toDto(s))
+                .toList();
+    }
 }

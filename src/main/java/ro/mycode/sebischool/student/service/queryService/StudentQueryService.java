@@ -10,4 +10,6 @@ public interface StudentQueryService {
     List<StudentResponse> getAllStudents();
     Optional<StudentResponse> getStudentByEmail(String email);
     Optional<StudentResponse> getStudentByFirstNameAndLastName(String firstName,String lastName);
+
+    List<StudentResponse> getStudentsByFirstName(String firstName);
 }

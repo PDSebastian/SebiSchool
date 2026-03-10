@@ -24,8 +24,15 @@ public class BookQueryServiceImpl implements BookQueryService {
         return bookRepository.findAll().stream().map(bookMapper::toDto).toList();
     }
 
+    @Override
+    public List<BookResponse> getAllBooks() {
+        return  bookRepository.findAll().stream().map(bookMapper::toDto).toList();
+    }
 
-
+    @Override
+    public BookResponse getBookByBookName(String bookName) {
+        return bookRepository.findByBookName(bookName).stream().findFirst().get();
+    }
 
 
 }

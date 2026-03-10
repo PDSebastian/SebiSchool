@@ -6,6 +6,7 @@ import ro.mycode.sebischool.books.exceptions.BookAlreadyExistsException;
 import ro.mycode.sebischool.books.exceptions.BookNotFoundException;
 import ro.mycode.sebischool.books.model.Book;
 import ro.mycode.sebischool.books.repository.BookRepository;
+import ro.mycode.sebischool.books.service.dtos.BookPatchRequest;
 import ro.mycode.sebischool.books.service.dtos.BookResponse;
 import ro.mycode.sebischool.books.service.dtos.Bookrequest;
 import ro.mycode.sebischool.books.service.mapper.BookMapper;
@@ -48,5 +49,15 @@ public class BookCommandServiceImpl implements BookCommandService {
     public void deleteBook(Long id) {
         if(!bookRepository.existsById(id)) {throw new BookNotFoundException("Book not found");}
         bookRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public BookResponse updatePatchBook(Long id, BookPatchRequest bookPatchRequest) {
+        Book b=bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException("Book not found"));
+        b.setBookName(bookPatchRequest.getBookName());
+        b.setCreatedAt(bookPatchRequest.getCreatedAt());
+        bookRepository.save(b);
+        return bookMapper.toDto(bookRepository.save(b));
     }
 }

@@ -22,7 +22,7 @@ import ro.mycode.sebischool.student.service.mapper.StudentMapper;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Component
+
 public class View {
     BookCommandService bookCommandService;
     StudentCommandService studentCommandService;

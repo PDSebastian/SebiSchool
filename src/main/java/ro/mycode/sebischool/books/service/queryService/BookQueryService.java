@@ -7,4 +7,8 @@ import java.util.List;
 
 public interface BookQueryService {
     List<BookResponse>findAllBooks();
+
+    List<BookResponse> getAllBooks();
+
+    BookResponse getBookByBookName(String bookName);
 }
