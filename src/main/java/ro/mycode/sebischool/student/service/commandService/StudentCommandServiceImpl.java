@@ -62,20 +62,20 @@ public class StudentCommandServiceImpl implements StudentCommandService {
         Student s = studentRepository.findById(id)
                 .orElseThrow(() -> new StudentNotFoundException("Student not found"));
 
-        if (studentRequest.getFirstName() != null) {
-            s.setFirstName(studentRequest.getFirstName());
+        if (studentRequest.firstName() != null) {
+            s.setFirstName(studentRequest.firstName());
         }
 
-        if (studentRequest.getLastName() != null) {
-            s.setLastName(studentRequest.getLastName());
+        if (studentRequest.lastName() != null) {
+            s.setLastName(studentRequest.lastName());
         }
 
-        if (studentRequest.getEmail() != null) {
-            s.setEmail(studentRequest.getEmail());
+        if (studentRequest.email() != null) {
+            s.setEmail(studentRequest.email());
         }
 
-        if (studentRequest.getAge() != null) {
-            s.setAge(studentRequest.getAge());
+        if (studentRequest.age() != null) {
+            s.setAge(studentRequest.age());
         }
         studentRepository.save(s);
         return studentMapper.toDto(s);
