@@ -11,7 +11,7 @@ public class EnrolmentMapper {
         if (enrolmentRequest == null) {
             return null;
         }
-      return  Enrolment.builder().createdAt(enrolmentRequest.getCreatedAt()).build();
+      return  Enrolment.builder().build();
 
     }
     public EnrolmentResponse toDto(Enrolment enrolment) {
