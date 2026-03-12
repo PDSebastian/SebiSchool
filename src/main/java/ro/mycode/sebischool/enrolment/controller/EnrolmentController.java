@@ -10,6 +10,7 @@ import ro.mycode.sebischool.enrolment.service.dtos.EnrolmentPatchRequest;
 import ro.mycode.sebischool.enrolment.service.dtos.EnrolmentRequest;
 import ro.mycode.sebischool.enrolment.service.dtos.EnrolmentResponse;
 import ro.mycode.sebischool.enrolment.service.queryService.EnrolmentQueryService;
+import ro.mycode.sebischool.student.dtos.StudentSummaryResponse;
 
 import java.util.List;
 
@@ -60,6 +61,14 @@ public class EnrolmentController {
         List<EnrolmentResponse> response = enrolmentQueryService.getAllEnrolmentsByCourseId(courseID);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+    @GetMapping("course/{courseID}/students")
+    public ResponseEntity< List<StudentSummaryResponse> >getStudentsByCourseId(@PathVariable Long courseID) {
+        List<StudentSummaryResponse> response = enrolmentQueryService.getStudentsByCourseId(courseID);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+
+
+    }
+
 
 
 

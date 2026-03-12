@@ -1,4 +1,4 @@
-package ro.mycode.sebischool.student.service.dtos;
+package ro.mycode.sebischool.student.dtos;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

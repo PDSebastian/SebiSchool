@@ -6,10 +6,10 @@ import ro.mycode.sebischool.student.exceptions.StudentAlreadyExistsException;
 import ro.mycode.sebischool.student.exceptions.StudentNotFoundException;
 import ro.mycode.sebischool.student.model.Student;
 import ro.mycode.sebischool.student.repository.StudentRepository;
-import ro.mycode.sebischool.student.service.dtos.StudentPatchRequest;
-import ro.mycode.sebischool.student.service.dtos.StudentRequest;
-import ro.mycode.sebischool.student.service.dtos.StudentResponse;
-import ro.mycode.sebischool.student.service.mapper.StudentMapper;
+import ro.mycode.sebischool.student.dtos.StudentPatchRequest;
+import ro.mycode.sebischool.student.dtos.StudentRequest;
+import ro.mycode.sebischool.student.dtos.StudentSummaryResponse;
+import ro.mycode.sebischool.student.mapper.StudentMapper;
 
 @Component
 public class StudentCommandServiceImpl implements StudentCommandService {
@@ -24,7 +24,7 @@ public class StudentCommandServiceImpl implements StudentCommandService {
 
     @Override
     @Transactional
-    public StudentResponse addStudent(StudentRequest studentRequest) {
+    public StudentSummaryResponse addStudent(StudentRequest studentRequest) {
         studentRepository.findByEmail(studentRequest.getEmail()).ifPresent(student -> {
             throw new StudentAlreadyExistsException("Student already exists");
         });
@@ -36,7 +36,7 @@ public class StudentCommandServiceImpl implements StudentCommandService {
 
     @Override
     @Transactional
-    public StudentResponse updateStudent(Long id, StudentRequest studentRequest) {
+    public StudentSummaryResponse updateStudent(Long id, StudentRequest studentRequest) {
         Student s = studentRepository.findById(id)
                 .orElseThrow(() -> new StudentNotFoundException("Student not found"));
         s.setFirstName(studentRequest.getFirstName());
@@ -58,7 +58,7 @@ public class StudentCommandServiceImpl implements StudentCommandService {
 
     @Override
     @Transactional
-    public StudentResponse updatePatchStudent(Long id, StudentPatchRequest studentRequest) {
+    public StudentSummaryResponse updatePatchStudent(Long id, StudentPatchRequest studentRequest) {
         Student s = studentRepository.findById(id)
                 .orElseThrow(() -> new StudentNotFoundException("Student not found"));
 

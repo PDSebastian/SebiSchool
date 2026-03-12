@@ -1,15 +1,17 @@
 package ro.mycode.sebischool.student.service.queryService;
 
-import org.springframework.data.jpa.repository.EntityGraph;
-import ro.mycode.sebischool.student.service.dtos.StudentResponse;
+import ro.mycode.sebischool.student.dtos.StudentDetailResponse;
+import ro.mycode.sebischool.student.dtos.StudentSummaryResponse;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface StudentQueryService {
-    List<StudentResponse> getAllStudents();
-    Optional<StudentResponse> getStudentByEmail(String email);
-    Optional<StudentResponse> getStudentByFirstNameAndLastName(String firstName,String lastName);
+    List<StudentSummaryResponse> getAllStudents();
+    Optional<StudentSummaryResponse> getStudentByEmail(String email);
+    Optional<StudentSummaryResponse> getStudentByFirstNameAndLastName(String firstName, String lastName);
 
-    List<StudentResponse> getStudentsByFirstName(String firstName);
+    StudentDetailResponse getCourseAndBooksByStudentID(Long studentID);
+
+    List<StudentSummaryResponse> getStudentsByFirstName(String firstName);
 }

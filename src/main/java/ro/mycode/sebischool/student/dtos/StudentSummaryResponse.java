@@ -1,4 +1,4 @@
-package ro.mycode.sebischool.student.service.dtos;
+package ro.mycode.sebischool.student.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class StudentResponse {
+public class StudentSummaryResponse {
     private long id;
     private String firstName;
     private String lastName;

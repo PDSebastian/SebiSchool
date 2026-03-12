@@ -5,7 +5,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import ro.mycode.sebischool.books.model.Book;
+import ro.mycode.sebischool.course.model.Course;
 import ro.mycode.sebischool.enrolment.model.Enrolment;
+import ro.mycode.sebischool.enrolment.service.dtos.EnrolmentResponse;
 
 
 import java.util.HashSet;
@@ -66,6 +68,7 @@ public class Student {
 
     @OneToMany(mappedBy = "student",cascade = CascadeType.ALL,orphanRemoval = true)
     Set<Enrolment> enrolments = new HashSet<>();
+
 
 
 

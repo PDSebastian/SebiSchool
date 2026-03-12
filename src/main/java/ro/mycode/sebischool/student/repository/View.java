@@ -1,23 +1,18 @@
 package ro.mycode.sebischool.student.repository;
 
-import org.springframework.stereotype.Component;
 import ro.mycode.sebischool.books.exceptions.BookNotFoundException;
 import ro.mycode.sebischool.books.model.Book;
 import ro.mycode.sebischool.books.repository.BookRepository;
 import ro.mycode.sebischool.books.service.commandService.BookCommandService;
-import ro.mycode.sebischool.books.service.dtos.BookResponse;
 import ro.mycode.sebischool.books.service.dtos.Bookrequest;
 import ro.mycode.sebischool.books.service.mapper.BookMapper;
-import ro.mycode.sebischool.course.exceptions.CourseNotFoundException;
 import ro.mycode.sebischool.course.model.Course;
 import ro.mycode.sebischool.course.repository.CourseRepository;
 import ro.mycode.sebischool.course.service.mapper.CourseMapper;
 import ro.mycode.sebischool.student.exceptions.StudentNotFoundException;
 import ro.mycode.sebischool.student.model.Student;
 import ro.mycode.sebischool.student.service.commandService.StudentCommandService;
-import ro.mycode.sebischool.student.service.dtos.StudentRequest;
-import ro.mycode.sebischool.student.service.dtos.StudentResponse;
-import ro.mycode.sebischool.student.service.mapper.StudentMapper;
+import ro.mycode.sebischool.student.mapper.StudentMapper;
 
 import java.time.LocalDateTime;
 import java.util.List;

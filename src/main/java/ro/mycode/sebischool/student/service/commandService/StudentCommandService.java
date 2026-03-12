@@ -1,15 +1,14 @@
 package ro.mycode.sebischool.student.service.commandService;
 
-import jakarta.validation.Valid;
-import ro.mycode.sebischool.student.service.dtos.StudentPatchRequest;
-import ro.mycode.sebischool.student.service.dtos.StudentRequest;
-import ro.mycode.sebischool.student.service.dtos.StudentResponse;
+import ro.mycode.sebischool.student.dtos.StudentPatchRequest;
+import ro.mycode.sebischool.student.dtos.StudentRequest;
+import ro.mycode.sebischool.student.dtos.StudentSummaryResponse;
 
 public interface StudentCommandService {
-    StudentResponse addStudent( StudentRequest studentRequest);
-    StudentResponse updateStudent(Long id , StudentRequest studentRequest);
+    StudentSummaryResponse addStudent(StudentRequest studentRequest);
+    StudentSummaryResponse updateStudent(Long id , StudentRequest studentRequest);
     void deleteStudent(Long id);
-    StudentResponse updatePatchStudent(Long id , StudentPatchRequest studentPatchRequest);
+    StudentSummaryResponse updatePatchStudent(Long id , StudentPatchRequest studentPatchRequest);
 
 
 

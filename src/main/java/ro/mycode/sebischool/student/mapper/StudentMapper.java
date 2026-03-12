@@ -1,9 +1,9 @@
-package ro.mycode.sebischool.student.service.mapper;
+package ro.mycode.sebischool.student.mapper;
 
 import org.springframework.stereotype.Component;
 import ro.mycode.sebischool.student.model.Student;
-import ro.mycode.sebischool.student.service.dtos.StudentRequest;
-import ro.mycode.sebischool.student.service.dtos.StudentResponse;
+import ro.mycode.sebischool.student.dtos.StudentRequest;
+import ro.mycode.sebischool.student.dtos.StudentSummaryResponse;
 
 @Component
 public class StudentMapper {
@@ -17,11 +17,11 @@ public class StudentMapper {
 
 
     }
-    public StudentResponse toDto(Student student) {
+    public StudentSummaryResponse toDto(Student student) {
         if (student == null) {
             return null;
         }
-        return new StudentResponse(
+        return new StudentSummaryResponse(
                 student.getId(),
                 student.getFirstName(),
                 student.getLastName(),
@@ -29,6 +29,7 @@ public class StudentMapper {
                 student.getAge()
 
         );
+
     }
 
 
