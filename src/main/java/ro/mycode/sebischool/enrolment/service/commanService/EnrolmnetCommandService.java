@@ -1,8 +1,8 @@
 package ro.mycode.sebischool.enrolment.service.commanService;
 
-import ro.mycode.sebischool.enrolment.service.dtos.EnrolmentPatchRequest;
-import ro.mycode.sebischool.enrolment.service.dtos.EnrolmentRequest;
-import ro.mycode.sebischool.enrolment.service.dtos.EnrolmentResponse;
+import ro.mycode.sebischool.enrolment.dtos.EnrolmentPatchRequest;
+import ro.mycode.sebischool.enrolment.dtos.EnrolmentRequest;
+import ro.mycode.sebischool.enrolment.dtos.EnrolmentResponse;
 
 public interface EnrolmnetCommandService {
     EnrolmentResponse addEnrolment(EnrolmentRequest enrolmentRequest);

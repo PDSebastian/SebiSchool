@@ -21,5 +21,5 @@ public interface StudentRepository extends JpaRepository<Student,Long> {
 
     @EntityGraph(attributePaths = {"enrolments", "enrolments.course", "books"})
     @Query("SELECT s FROM Student s WHERE s.id = :studentID")
-    Optional<Student> findByIdWithCoursesAndBooks(@Param("studentID") Long studentID);
+    Optional<Student> findStudentById(@Param("studentID") Long studentID);
 }

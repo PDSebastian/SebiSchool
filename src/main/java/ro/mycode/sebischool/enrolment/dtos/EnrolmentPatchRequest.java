@@ -1,4 +1,4 @@
-package ro.mycode.sebischool.enrolment.service.dtos;
+package ro.mycode.sebischool.enrolment.dtos;
 
 public record EnrolmentPatchRequest(
       Long courseId,

@@ -1,8 +1,8 @@
 package ro.mycode.sebischool.books.service.commandService;
 
-import ro.mycode.sebischool.books.service.dtos.BookPatchRequest;
-import ro.mycode.sebischool.books.service.dtos.BookResponse;
-import ro.mycode.sebischool.books.service.dtos.Bookrequest;
+import ro.mycode.sebischool.books.dtos.BookPatchRequest;
+import ro.mycode.sebischool.books.dtos.BookResponse;
+import ro.mycode.sebischool.books.dtos.Bookrequest;
 
 public interface BookCommandService {
     BookResponse addBook(Long id, Bookrequest bookRequest);

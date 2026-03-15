@@ -6,9 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ro.mycode.sebischool.course.service.commandService.CourseCommandService;
-import ro.mycode.sebischool.course.service.dtos.CoursePatchRequest;
-import ro.mycode.sebischool.course.service.dtos.CourseRequest;
-import ro.mycode.sebischool.course.service.dtos.CourseResponse;
+import ro.mycode.sebischool.course.dtos.CoursePatchRequest;
+import ro.mycode.sebischool.course.dtos.CourseRequest;
+import ro.mycode.sebischool.course.dtos.CourseResponse;
 import ro.mycode.sebischool.course.service.queryService.CourseQueryService;
 
 import java.util.List;
@@ -61,6 +61,15 @@ public class CourseController {
         CourseResponse course = courseQueryService.getCourseByName(name);
         return ResponseEntity.status(HttpStatus.OK).body(course);
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<CourseResponse> getCourseById(@PathVariable Long id) {
+        log.debug("http get /api/v2/course/{}", id);
+        CourseResponse r=courseQueryService.getCourseById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(r);
+
+    }
+
+
 
 
 

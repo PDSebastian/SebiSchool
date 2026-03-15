@@ -14,11 +14,10 @@ import ro.mycode.sebischool.student.mapper.StudentMapper;
 @Component
 public class StudentCommandServiceImpl implements StudentCommandService {
     StudentRepository studentRepository;
-    StudentMapper studentMapper;
 
-    StudentCommandServiceImpl(StudentRepository studentRepository, StudentMapper studentMapper) {
+
+    StudentCommandServiceImpl(StudentRepository studentRepository ) {
         this.studentRepository = studentRepository;
-        this.studentMapper = studentMapper;
     }
 
 
@@ -29,9 +28,9 @@ public class StudentCommandServiceImpl implements StudentCommandService {
             throw new StudentAlreadyExistsException("Student already exists");
         });
 
-        Student student = studentMapper.toEntity(studentRequest);
+        Student student = StudentMapper.StudentRequesttoStudent(studentRequest);
         Student savedStudent = studentRepository.save(student);
-        return studentMapper.toDto(savedStudent);
+        return StudentMapper.StudentToStudentSummaryResponse(savedStudent);
     }
 
     @Override
@@ -44,7 +43,7 @@ public class StudentCommandServiceImpl implements StudentCommandService {
         s.setEmail(studentRequest.getEmail());
         s.setAge(studentRequest.getAge());
         studentRepository.save(s);
-        return studentMapper.toDto(s);
+        return StudentMapper.StudentToStudentSummaryResponse(s);
     }
 
     @Override
@@ -78,6 +77,6 @@ public class StudentCommandServiceImpl implements StudentCommandService {
             s.setAge(studentRequest.age());
         }
         studentRepository.save(s);
-        return studentMapper.toDto(s);
+        return StudentMapper.StudentToStudentSummaryResponse(s);
     }
 }

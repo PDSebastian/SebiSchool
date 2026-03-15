@@ -8,10 +8,10 @@ import ro.mycode.sebischool.course.repository.CourseRepository;
 import ro.mycode.sebischool.enrolment.exceptions.EnrolmentNotFoundException;
 import ro.mycode.sebischool.enrolment.model.Enrolment;
 import ro.mycode.sebischool.enrolment.repository.EnrolmentRepository;
-import ro.mycode.sebischool.enrolment.service.dtos.EnrolmentPatchRequest;
-import ro.mycode.sebischool.enrolment.service.dtos.EnrolmentRequest;
-import ro.mycode.sebischool.enrolment.service.dtos.EnrolmentResponse;
-import ro.mycode.sebischool.enrolment.service.mappers.EnrolmentMapper;
+import ro.mycode.sebischool.enrolment.dtos.EnrolmentPatchRequest;
+import ro.mycode.sebischool.enrolment.dtos.EnrolmentRequest;
+import ro.mycode.sebischool.enrolment.dtos.EnrolmentResponse;
+import ro.mycode.sebischool.enrolment.mappers.EnrolmentMapper;
 import ro.mycode.sebischool.student.exceptions.StudentNotFoundException;
 import ro.mycode.sebischool.student.model.Student;
 import ro.mycode.sebischool.student.repository.StudentRepository;
@@ -21,13 +21,11 @@ import java.time.LocalDateTime;
 @Component
 public class EnrolmentCommandServiceImpl implements EnrolmnetCommandService {
     EnrolmentRepository enrolmentRepository;
-    EnrolmentMapper enrolmentMapper;
     StudentRepository studentRepository;
     CourseRepository courseRepository;
 
-   public EnrolmentCommandServiceImpl(EnrolmentRepository enrolmentRepository, EnrolmentMapper enrolmentMapper, StudentRepository studentRepository,CourseRepository courseRepository) {
+   public EnrolmentCommandServiceImpl(EnrolmentRepository enrolmentRepository, StudentRepository studentRepository,CourseRepository courseRepository) {
        this.enrolmentRepository = enrolmentRepository;
-       this.enrolmentMapper = enrolmentMapper;
        this.studentRepository = studentRepository;
        this.courseRepository = courseRepository;
    }
@@ -46,7 +44,7 @@ public class EnrolmentCommandServiceImpl implements EnrolmnetCommandService {
         enrolment.setCourse(course);
         enrolment.setCreatedAt(LocalDateTime.now());
         Enrolment savedEnrolment = enrolmentRepository.save(enrolment);
-        return enrolmentMapper.toDto(savedEnrolment);
+        return EnrolmentMapper.toDto(savedEnrolment);
     }
 
     @Override
@@ -54,7 +52,7 @@ public class EnrolmentCommandServiceImpl implements EnrolmnetCommandService {
     public EnrolmentResponse updateEnrolment(Long id, EnrolmentRequest enrolmentRequest) {
         Enrolment e = enrolmentRepository.findById(id)
                 .orElseThrow(() -> new EnrolmentNotFoundException("Enrolment not found"));
-        return enrolmentMapper.toDto(enrolmentRepository.save(e));
+        return EnrolmentMapper.toDto(enrolmentRepository.save(e));
     }
 
 
@@ -86,7 +84,7 @@ public class EnrolmentCommandServiceImpl implements EnrolmnetCommandService {
 
 
         }
-        return enrolmentMapper.toDto(enrolmentRepository.save(enrolment));
+        return EnrolmentMapper.toDto(enrolmentRepository.save(enrolment));
 
     }
 }

@@ -1,8 +1,8 @@
 package ro.mycode.sebischool.course.service.commandService;
 
-import ro.mycode.sebischool.course.service.dtos.CoursePatchRequest;
-import ro.mycode.sebischool.course.service.dtos.CourseRequest;
-import ro.mycode.sebischool.course.service.dtos.CourseResponse;
+import ro.mycode.sebischool.course.dtos.CoursePatchRequest;
+import ro.mycode.sebischool.course.dtos.CourseRequest;
+import ro.mycode.sebischool.course.dtos.CourseResponse;
 
 public interface CourseCommandService {
     CourseResponse addCourse( CourseRequest courseRequest);

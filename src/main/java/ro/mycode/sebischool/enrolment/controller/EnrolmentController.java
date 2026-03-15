@@ -6,9 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ro.mycode.sebischool.enrolment.service.commanService.EnrolmnetCommandService;
-import ro.mycode.sebischool.enrolment.service.dtos.EnrolmentPatchRequest;
-import ro.mycode.sebischool.enrolment.service.dtos.EnrolmentRequest;
-import ro.mycode.sebischool.enrolment.service.dtos.EnrolmentResponse;
+import ro.mycode.sebischool.enrolment.dtos.EnrolmentPatchRequest;
+import ro.mycode.sebischool.enrolment.dtos.EnrolmentRequest;
+import ro.mycode.sebischool.enrolment.dtos.EnrolmentResponse;
 import ro.mycode.sebischool.enrolment.service.queryService.EnrolmentQueryService;
 import ro.mycode.sebischool.student.dtos.StudentSummaryResponse;
 

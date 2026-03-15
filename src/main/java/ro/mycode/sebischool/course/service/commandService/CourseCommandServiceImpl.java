@@ -6,18 +6,16 @@ import ro.mycode.sebischool.books.exceptions.BookAlreadyExistsException;
 import ro.mycode.sebischool.course.exceptions.CourseNotFoundException;
 import ro.mycode.sebischool.course.model.Course;
 import ro.mycode.sebischool.course.repository.CourseRepository;
-import ro.mycode.sebischool.course.service.dtos.CoursePatchRequest;
-import ro.mycode.sebischool.course.service.dtos.CourseRequest;
-import ro.mycode.sebischool.course.service.dtos.CourseResponse;
+import ro.mycode.sebischool.course.dtos.CoursePatchRequest;
+import ro.mycode.sebischool.course.dtos.CourseRequest;
+import ro.mycode.sebischool.course.dtos.CourseResponse;
 import ro.mycode.sebischool.course.service.mapper.CourseMapper;
 
 @Component
 public class CourseCommandServiceImpl implements CourseCommandService {
     CourseRepository courseRepository;
-    CourseMapper courseMapper;
-    public CourseCommandServiceImpl(CourseRepository courseRepository, CourseMapper courseMapper) {
+    public CourseCommandServiceImpl(CourseRepository courseRepository) {
         this.courseRepository = courseRepository;
-        this.courseMapper = courseMapper;
     }
 
     @Override
@@ -25,8 +23,8 @@ public class CourseCommandServiceImpl implements CourseCommandService {
     public CourseResponse addCourse( CourseRequest courseRequest) {
         courseRepository.findByName(courseRequest.getName())
                 .ifPresent(course -> {throw new BookAlreadyExistsException("Course already exists");});
-        courseRepository.save(courseMapper.toEntity(courseRequest));
-        return courseMapper.toDto(courseRepository.save(courseMapper.toEntity(courseRequest)));
+        courseRepository.save(CourseMapper.toEntity(courseRequest));
+        return CourseMapper.toDto(courseRepository.save(CourseMapper.toEntity(courseRequest)));
     }
 
     @Override
@@ -46,8 +44,8 @@ public class CourseCommandServiceImpl implements CourseCommandService {
                 .orElseThrow(() -> new CourseNotFoundException("Course not found"));
         course.setName(courseRequest.getName());
         course.setDepartament(courseRequest.getDepartament());
-        courseRepository.save(courseMapper.toEntity(courseRequest));
-        return courseMapper.toDto(courseRepository.save(courseMapper.toEntity(courseRequest)));
+        courseRepository.save(CourseMapper.toEntity(courseRequest));
+        return CourseMapper.toDto(courseRepository.save(CourseMapper.toEntity(courseRequest)));
     }
 
     @Override
@@ -62,6 +60,6 @@ public class CourseCommandServiceImpl implements CourseCommandService {
             course.setDepartament(request.departament());
         }
         Course savedCourse = courseRepository.save(course);
-        return courseMapper.toDto(savedCourse);
+        return CourseMapper.toDto(savedCourse);
     }
 }

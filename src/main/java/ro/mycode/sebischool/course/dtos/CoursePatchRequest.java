@@ -1,9 +1,6 @@
-package ro.mycode.sebischool.course.service.dtos;
+package ro.mycode.sebischool.course.dtos;
 
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 
 public record CoursePatchRequest(

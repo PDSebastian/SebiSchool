@@ -1,12 +1,7 @@
 package ro.mycode.sebischool.student.service.queryService;
 
 import org.springframework.stereotype.Component;
-import ro.mycode.sebischool.books.service.dtos.BookResponse;
-import ro.mycode.sebischool.books.service.mapper.BookMapper;
-import ro.mycode.sebischool.course.service.dtos.CourseResponse;
-import ro.mycode.sebischool.course.service.mapper.CourseMapper;
 import ro.mycode.sebischool.student.exceptions.StudentNotFoundException;
-import ro.mycode.sebischool.student.mapper.StudentMapperListTODetail;
 import ro.mycode.sebischool.student.model.Student;
 import ro.mycode.sebischool.student.repository.StudentRepository;
 import ro.mycode.sebischool.student.dtos.StudentDetailResponse;
@@ -19,27 +14,22 @@ import java.util.Optional;
 
 @Component
 public class StudentQueryServiceImpl implements StudentQueryService{
-    private final CourseMapper courseMapper;
-    private final BookMapper bookMapper;
-   StudentMapperListTODetail studentMapperListTODetail;
+
+
     StudentRepository studentRepository;
-    StudentMapper studentMapper;
-    public StudentQueryServiceImpl(StudentRepository studentRepository, StudentMapper studentMapper, CourseMapper courseMapper, BookMapper bookMapper,
-                                   StudentMapperListTODetail studentMapperListTODetail) {
+
+    public StudentQueryServiceImpl(StudentRepository studentRepository) {
 
 
         this.studentRepository = studentRepository;
-        this.studentMapper = studentMapper;
-        this.courseMapper = courseMapper;
-        this.bookMapper = bookMapper;
-        this.studentMapperListTODetail = studentMapperListTODetail;
+
     }
 
 
     @Override
     public List<StudentSummaryResponse> getAllStudents() {
         List<Student> s = studentRepository.findAll();
-       return s.stream().map(student -> studentMapper.toDto(student)).toList();
+       return s.stream().map(StudentMapper::StudentToStudentSummaryResponse).toList();
     }
 
     @Override
@@ -55,9 +45,9 @@ public class StudentQueryServiceImpl implements StudentQueryService{
     }
 
     @Override
-    public StudentDetailResponse getCourseAndBooksByStudentID(Long studentID) {
+    public StudentDetailResponse getStudentById(Long studentID) {
         Student s=studentRepository.findById(studentID).orElseThrow(()->new StudentNotFoundException("Student not found"));
-        return studentMapperListTODetail.toDto(s);
+        return  StudentMapper.StudentToStudentDetailResponse(s);
 
     }
 
@@ -65,7 +55,7 @@ public class StudentQueryServiceImpl implements StudentQueryService{
     public List<StudentSummaryResponse> getStudentsByFirstName(String firstName) {
         return studentRepository.findStudentByFirstName(firstName)
                 .stream()
-                .map(s->studentMapper.toDto(s))
+                .map(StudentMapper::StudentToStudentSummaryResponse)
                 .toList();
     }
 

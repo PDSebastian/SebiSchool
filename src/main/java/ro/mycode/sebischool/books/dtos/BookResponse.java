@@ -1,4 +1,4 @@
-package ro.mycode.sebischool.books.service.dtos;
+package ro.mycode.sebischool.books.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

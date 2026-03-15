@@ -1,4 +1,4 @@
-package ro.mycode.sebischool.books.service.dtos;
+package ro.mycode.sebischool.books.dtos;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

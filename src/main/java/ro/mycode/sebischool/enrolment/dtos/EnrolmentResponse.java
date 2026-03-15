@@ -1,4 +1,4 @@
-package ro.mycode.sebischool.enrolment.service.dtos;
+package ro.mycode.sebischool.enrolment.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

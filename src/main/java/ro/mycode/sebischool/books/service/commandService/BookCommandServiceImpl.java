@@ -2,14 +2,13 @@ package ro.mycode.sebischool.books.service.commandService;
 
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import ro.mycode.sebischool.books.exceptions.BookAlreadyExistsException;
 import ro.mycode.sebischool.books.exceptions.BookNotFoundException;
 import ro.mycode.sebischool.books.model.Book;
 import ro.mycode.sebischool.books.repository.BookRepository;
-import ro.mycode.sebischool.books.service.dtos.BookPatchRequest;
-import ro.mycode.sebischool.books.service.dtos.BookResponse;
-import ro.mycode.sebischool.books.service.dtos.Bookrequest;
-import ro.mycode.sebischool.books.service.mapper.BookMapper;
+import ro.mycode.sebischool.books.dtos.BookPatchRequest;
+import ro.mycode.sebischool.books.dtos.BookResponse;
+import ro.mycode.sebischool.books.dtos.Bookrequest;
+import ro.mycode.sebischool.books.mapper.BookMapper;
 import ro.mycode.sebischool.student.exceptions.StudentNotFoundException;
 import ro.mycode.sebischool.student.model.Student;
 import ro.mycode.sebischool.student.repository.StudentRepository;
@@ -18,20 +17,19 @@ import ro.mycode.sebischool.student.repository.StudentRepository;
 public class BookCommandServiceImpl implements BookCommandService {
     private final StudentRepository studentRepository;
     BookRepository bookRepository;
-    BookMapper bookMapper;
-    BookCommandServiceImpl(BookRepository bookRepository, BookMapper bookMapper, StudentRepository studentRepository) {
+
+    BookCommandServiceImpl(BookRepository bookRepository,  StudentRepository studentRepository) {
         this.bookRepository = bookRepository;
-        this.bookMapper = bookMapper;
         this.studentRepository = studentRepository;
     }
     @Override
     @Transactional
     public BookResponse addBook(Long id, Bookrequest bookRequest) {
-        Book b=bookMapper.toEntity(bookRequest);
+        Book b=BookMapper.toEntity(bookRequest);
         Student s=studentRepository.findById(id).orElseThrow(()->new StudentNotFoundException("Student Not Found"));
         b.setStudent(s);
         Book book=bookRepository.save(b);
-        return bookMapper.toDto(bookRepository.save(book));
+        return BookMapper.toDto(bookRepository.save(book));
     }
 
     @Override
@@ -41,7 +39,7 @@ public class BookCommandServiceImpl implements BookCommandService {
         book.setBookName(bookRequest.getBookName());
         book.setCreatedAt(bookRequest.getCreatedAt());
         bookRepository.save(book);
-        return bookMapper.toDto(book);
+        return BookMapper.toDto(book);
     }
 
     @Override
@@ -58,6 +56,6 @@ public class BookCommandServiceImpl implements BookCommandService {
         b.setBookName(bookPatchRequest.getBookName());
         b.setCreatedAt(bookPatchRequest.getCreatedAt());
         bookRepository.save(b);
-        return bookMapper.toDto(bookRepository.save(b));
+        return BookMapper.toDto(bookRepository.save(b));
     }
 }

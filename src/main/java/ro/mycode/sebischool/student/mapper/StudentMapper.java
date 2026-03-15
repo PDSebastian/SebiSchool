@@ -1,13 +1,15 @@
 package ro.mycode.sebischool.student.mapper;
 
-import org.springframework.stereotype.Component;
+import ro.mycode.sebischool.books.mapper.BookMapper;
+import ro.mycode.sebischool.course.service.mapper.CourseMapper;
+import ro.mycode.sebischool.student.dtos.StudentDetailResponse;
 import ro.mycode.sebischool.student.model.Student;
 import ro.mycode.sebischool.student.dtos.StudentRequest;
 import ro.mycode.sebischool.student.dtos.StudentSummaryResponse;
 
-@Component
+
 public class StudentMapper {
-    public Student toEntity(StudentRequest studentRequest) {
+    public static Student StudentRequesttoStudent(StudentRequest studentRequest) {
         if (studentRequest == null) {
             return null;
         }
@@ -17,7 +19,7 @@ public class StudentMapper {
 
 
     }
-    public StudentSummaryResponse toDto(Student student) {
+    public static  StudentSummaryResponse StudentToStudentSummaryResponse(Student student) {
         if (student == null) {
             return null;
         }
@@ -28,6 +30,22 @@ public class StudentMapper {
                 student.getEmail(),
                 student.getAge()
 
+        );
+
+    }
+
+
+    public static StudentDetailResponse StudentToStudentDetailResponse(Student student){
+        if(student==null){
+            return null;
+        }
+        return new StudentDetailResponse(
+                student.getId(),
+                student.getFirstName(),
+                student.getLastName(),
+                student.getEmail(),
+                student.getEnrolments().stream().map(enrolment -> CourseMapper.toDto(enrolment.getCourse())).toList(),
+                student.getBooks().stream().map(BookMapper::toDto).toList()
         );
 
     }

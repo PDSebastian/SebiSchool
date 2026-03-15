@@ -11,7 +11,7 @@ public interface StudentQueryService {
     Optional<StudentSummaryResponse> getStudentByEmail(String email);
     Optional<StudentSummaryResponse> getStudentByFirstNameAndLastName(String firstName, String lastName);
 
-    StudentDetailResponse getCourseAndBooksByStudentID(Long studentID);
+    StudentDetailResponse getStudentById(Long studentID);
 
     List<StudentSummaryResponse> getStudentsByFirstName(String firstName);
 }

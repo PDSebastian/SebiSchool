@@ -3,6 +3,7 @@ package ro.mycode.sebischool.enrolment.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import ro.mycode.sebischool.books.model.Book;
 import ro.mycode.sebischool.course.model.Course;
 import ro.mycode.sebischool.student.model.Student;
 
@@ -52,6 +53,13 @@ public class Enrolment {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="course_id",referencedColumnName = "id")
     private Course course;
+
+
+    @ManyToOne
+    @JoinColumn(name = "book_id")
+    private Book book;
+
+
 
 
 

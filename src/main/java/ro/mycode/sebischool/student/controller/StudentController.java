@@ -59,10 +59,10 @@ public class StudentController {
         List<StudentSummaryResponse> students = studentQueryService.getStudentsByFirstName(firstName);
         return ResponseEntity.status(HttpStatus.OK).body(students);
     }
-    @GetMapping("/{id}/studentDetails")
+    @GetMapping("/{id}/getStudentById")
     public ResponseEntity<StudentDetailResponse> getStudentDetails(@PathVariable Long id) {
         log.debug("http get /api/v2/student/details/{}", id);
-        StudentDetailResponse s= studentQueryService.getCourseAndBooksByStudentID(id);
+        StudentDetailResponse s= studentQueryService.getStudentById(id);
         return ResponseEntity.status(HttpStatus.OK).body(s);
     }
 

@@ -6,12 +6,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ro.mycode.sebischool.books.service.commandService.BookCommandService;
-import ro.mycode.sebischool.books.service.dtos.BookPatchRequest;
-import ro.mycode.sebischool.books.service.dtos.BookResponse;
-import ro.mycode.sebischool.books.service.dtos.Bookrequest;
+import ro.mycode.sebischool.books.dtos.BookPatchRequest;
+import ro.mycode.sebischool.books.dtos.BookResponse;
+import ro.mycode.sebischool.books.dtos.Bookrequest;
 import ro.mycode.sebischool.books.service.queryService.BookQueryService;
 
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/v2/book")
@@ -63,6 +64,12 @@ public class BookController {
     public ResponseEntity<BookResponse> getBookByBookName(@PathVariable String bookName) {
         log.debug("http get /api/v2/books/bookName/{}", bookName);
         BookResponse b = bookQueryService.getBookByBookName(bookName);
+        return ResponseEntity.status(HttpStatus.OK).body(b);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<BookResponse> getBookById(@PathVariable Long id) {
+        log.debug("http get /api/v2/books/{}", id);
+       BookResponse b=bookQueryService.getBookById(id);
         return ResponseEntity.status(HttpStatus.OK).body(b);
     }
 
