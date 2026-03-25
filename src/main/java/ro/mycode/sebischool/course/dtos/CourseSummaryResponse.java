@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ro.mycode.sebischool.student.dtos.StudentSummaryResponse;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -13,4 +16,5 @@ public class CourseResponse {
    private long id;
    private String name;
    private String department;
+   List<StudentSummaryResponse> students;
 }
