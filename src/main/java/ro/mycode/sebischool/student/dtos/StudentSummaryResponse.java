@@ -13,5 +13,5 @@ public class StudentSummaryResponse {
     private String firstName;
     private String lastName;
     private String email;
-    private int phoneNumber;
+    private int age;
 }

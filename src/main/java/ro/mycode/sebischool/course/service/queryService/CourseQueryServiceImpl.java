@@ -1,11 +1,10 @@
 package ro.mycode.sebischool.course.service.queryService;
 
 import org.springframework.stereotype.Component;
-import ro.mycode.sebischool.course.dtos.CourseRequest;
 import ro.mycode.sebischool.course.exceptions.CourseNotFoundException;
 import ro.mycode.sebischool.course.repository.CourseRepository;
-import ro.mycode.sebischool.course.dtos.CourseResponse;
-import ro.mycode.sebischool.course.service.mapper.CourseMapper;
+import ro.mycode.sebischool.course.dtos.CourseSummaryResponse;
+import ro.mycode.sebischool.course.mapper.CourseMapper;
 
 import java.util.List;
 
@@ -19,27 +18,27 @@ public class CourseQueryServiceImpl implements CourseQueryService{
 
 
     @Override
-    public List<CourseResponse> getAllCourses() {
+    public List<CourseSummaryResponse> getAllCourses() {
         return courseRepository.findAll()
                 .stream()
                 .map(CourseMapper::toDto).toList();    }
 
     @Override
-    public CourseResponse getCourseById(Long id) {
+    public CourseSummaryResponse getCourseById(Long id) {
         return courseRepository.findById(id)
                 .map(CourseMapper::toDto)
-                .orElseThrow(() -> new CourseNotFoundException("Course not found"));
+                .orElseThrow(() -> new CourseNotFoundException());
 
     }
 
     @Override
-    public CourseResponse getCourseByName(String name) {
+    public CourseSummaryResponse getCourseByName(String name) {
         return courseRepository.findByName(name)
-                .map(CourseMapper::toDto).orElseThrow(()-> new CourseNotFoundException("Course not found"));
+                .map(CourseMapper::toDto).orElseThrow(()-> new CourseNotFoundException());
     }
 
     @Override
-    public List<CourseResponse> getAllCoursesWithEnrollment() {
+    public List<CourseSummaryResponse> getAllCoursesWithEnrollment() {
         return courseRepository.findAllByEnrolmentsIsNotEmpty().stream().map(CourseMapper::toDto).toList();
     }
 }

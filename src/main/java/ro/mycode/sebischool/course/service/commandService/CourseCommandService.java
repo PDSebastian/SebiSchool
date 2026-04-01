@@ -2,11 +2,11 @@ package ro.mycode.sebischool.course.service.commandService;
 
 import ro.mycode.sebischool.course.dtos.CoursePatchRequest;
 import ro.mycode.sebischool.course.dtos.CourseRequest;
-import ro.mycode.sebischool.course.dtos.CourseResponse;
+import ro.mycode.sebischool.course.dtos.CourseSummaryResponse;
 
 public interface CourseCommandService {
-    CourseResponse addCourse( CourseRequest courseRequest);
-    CourseResponse deleteCourse(Long id);
-    CourseResponse updateCourse(Long id, CourseRequest courseRequest);
-    CourseResponse updatePatchCourse(Long id, CoursePatchRequest coursePatchRequest);
+    CourseSummaryResponse addCourse(CourseRequest courseRequest);
+    CourseSummaryResponse deleteCourse(Long id);
+    CourseSummaryResponse updateCourse(Long id, CourseRequest courseRequest);
+    CourseSummaryResponse updatePatchCourse(Long id, CoursePatchRequest coursePatchRequest);
 }

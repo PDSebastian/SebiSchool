@@ -14,4 +14,5 @@ public interface StudentQueryService {
     StudentDetailResponse getStudentById(Long studentID);
 
     List<StudentSummaryResponse> getStudentsByFirstName(String firstName);
+    StudentSummaryResponse getStudentWithEnrolments(Long studentID);
 }

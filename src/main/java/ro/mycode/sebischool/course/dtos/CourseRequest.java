@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class CourseRequest {
+    Long id;
     @NotBlank(message = "Numele cursului e obligatoriu")
     private String name;
 

@@ -11,15 +11,8 @@ public interface EnrolmentRepository extends JpaRepository<Enrolment,Long> {
 
     @EntityGraph(attributePaths = {"student","course"})
     List<Enrolment> findByCourseId(Long courseId);
+    boolean existsByStudentIdAndCourseId(Long studentId, Long courseId);
 
 
-
-
-
-
-
-
-
-
-
+    int countByCourseId(Long id);
 }

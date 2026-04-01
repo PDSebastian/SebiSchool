@@ -14,6 +14,8 @@ public interface CourseRepository extends JpaRepository<Course,Long> {
     Optional<Course> findById(long id);
 
 
+   boolean existsByName(String name);
+
     @EntityGraph(attributePaths = "enrolments")
 
 

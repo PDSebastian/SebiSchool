@@ -49,7 +49,8 @@ public class Course {
                 ", departament='" + departament + '\'' +
                 '}';
     }
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL,orphanRemoval = true)
+    @Builder.Default
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Enrolment> enrolments = new ArrayList<>();
 
 }

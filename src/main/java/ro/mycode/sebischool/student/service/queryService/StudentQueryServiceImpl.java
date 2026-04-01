@@ -46,7 +46,7 @@ public class StudentQueryServiceImpl implements StudentQueryService{
 
     @Override
     public StudentDetailResponse getStudentById(Long studentID) {
-        Student s=studentRepository.findById(studentID).orElseThrow(()->new StudentNotFoundException("Student not found"));
+        Student s=studentRepository.findById(studentID).orElseThrow(()->new StudentNotFoundException());
         return  StudentMapper.StudentToStudentDetailResponse(s);
 
     }
@@ -59,8 +59,11 @@ public class StudentQueryServiceImpl implements StudentQueryService{
                 .toList();
     }
 
-
-
+    @Override
+    public StudentSummaryResponse getStudentWithEnrolments(Long studentID) {
+        Student s=studentRepository.findById(studentID).orElseThrow(()->new StudentNotFoundException());
+        return StudentMapper.StudentToStudentSummaryResponse(s);
+    }
 
 
 }

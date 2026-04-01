@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ro.mycode.sebischool.enrolment.dtos.EnrolmentResponse;
 import ro.mycode.sebischool.student.dtos.*;
 import ro.mycode.sebischool.student.service.commandService.StudentCommandService;
 import ro.mycode.sebischool.student.service.queryService.StudentQueryService;
@@ -41,9 +42,9 @@ public class StudentController {
         return ResponseEntity.status(HttpStatus.OK).body(s);
     }
     @PutMapping("/update/{id}")
-    public ResponseEntity<StudentSummaryResponse> updateStudent(@PathVariable Long id, @Valid @RequestBody StudentRequest studentRequest) {
-        log.debug("http put /api/v2/student/update/{}", id);
-        StudentSummaryResponse s = studentCommandService.updateStudent(id, studentRequest);
+    public ResponseEntity<StudentSummaryResponse> updateStudent(@PathVariable String email, @Valid @RequestBody StudentRequest studentRequest) {
+        log.debug("http put /api/v2/student/update/{}", email);
+        StudentSummaryResponse s = studentCommandService.updateStudent(studentRequest);
         return ResponseEntity.status(HttpStatus.OK).body(s);
     }
     @GetMapping("/all")
@@ -65,6 +66,12 @@ public class StudentController {
         StudentDetailResponse s= studentQueryService.getStudentById(id);
         return ResponseEntity.status(HttpStatus.OK).body(s);
     }
+//    @GetMapping("{id}/enrolments")
+//    public ResponseEntity<StudentDetailResponse> getStudentWithEnrolments(@PathVariable Long id) {
+//        log.debug("http get /api/v2/student/enrolments/{}", id);
+//        StudentSummaryResponse s= studentQueryService.getStudentWithEnrolments(id);
+//        return ResponseEntity.status(HttpStatus.OK).body(s);
+//    }
 
 
 

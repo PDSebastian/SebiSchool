@@ -12,9 +12,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CourseResponse {
+public class CourseSummaryResponse {
    private long id;
    private String name;
    private String department;
-   List<StudentSummaryResponse> students;
+    List<StudentSummaryResponse> students;
+
 }

@@ -1,4 +1,4 @@
-package ro.mycode.system.exceptions;
+package ro.mycode.sebischool.system.exceptions;
 
 import lombok.Builder;
 
@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 public record ApiErrorResponse(
         LocalDateTime dateTime,
         int state,
-        String message,
-        String hint
+        String message
 ) {
 }

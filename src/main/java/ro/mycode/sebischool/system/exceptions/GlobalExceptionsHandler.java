@@ -14,11 +14,10 @@ import ro.mycode.sebischool.enrolment.exceptions.EnrolmentNotFoundException;
 import ro.mycode.sebischool.student.exceptions.InvalidStudentAgeException;
 import ro.mycode.sebischool.student.exceptions.StudentAlreadyExistsException;
 import ro.mycode.sebischool.student.exceptions.StudentNotFoundException;
-
 import java.time.LocalDateTime;
 
 @RestControllerAdvice
-public class GlobalExceptions {
+public class GlobalExceptionsHandler {
     @ExceptionHandler({
             StudentNotFoundException.class,
             BookNotFoundException.class,

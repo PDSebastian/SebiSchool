@@ -1,13 +1,13 @@
 package ro.mycode.sebischool.course.service.queryService;
 
-import ro.mycode.sebischool.course.dtos.CourseResponse;
+import ro.mycode.sebischool.course.dtos.CourseSummaryResponse;
 
 import java.util.List;
 
 public interface CourseQueryService {
-    List<CourseResponse> getAllCourses();
-    CourseResponse getCourseById(Long id);
-    CourseResponse getCourseByName(String name);
-    List<CourseResponse> getAllCoursesWithEnrollment();
+    List<CourseSummaryResponse> getAllCourses();
+    CourseSummaryResponse getCourseById(Long id);
+    CourseSummaryResponse getCourseByName(String name);
+    List<CourseSummaryResponse> getAllCoursesWithEnrollment();
 
 }

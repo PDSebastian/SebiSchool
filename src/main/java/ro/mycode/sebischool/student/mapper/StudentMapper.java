@@ -1,7 +1,7 @@
 package ro.mycode.sebischool.student.mapper;
 
 import ro.mycode.sebischool.books.mapper.BookMapper;
-import ro.mycode.sebischool.course.service.mapper.CourseMapper;
+import ro.mycode.sebischool.course.mapper.CourseMapper;
 import ro.mycode.sebischool.student.dtos.StudentDetailResponse;
 import ro.mycode.sebischool.student.model.Student;
 import ro.mycode.sebischool.student.dtos.StudentRequest;

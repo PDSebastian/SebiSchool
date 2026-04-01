@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ro.mycode.sebischool.course.exceptions.CourseNotFoundException;
 import ro.mycode.sebischool.course.model.Course;
 import ro.mycode.sebischool.course.repository.CourseRepository;
+import ro.mycode.sebischool.enrolment.exceptions.EnrolmentAlreadyExistsException;
 import ro.mycode.sebischool.enrolment.exceptions.EnrolmentNotFoundException;
 import ro.mycode.sebischool.enrolment.model.Enrolment;
 import ro.mycode.sebischool.enrolment.repository.EnrolmentRepository;
@@ -34,10 +35,14 @@ public class EnrolmentCommandServiceImpl implements EnrolmnetCommandService {
     @Transactional
     public EnrolmentResponse addEnrolment(EnrolmentRequest enrolmentRequest) {
         Student student = studentRepository.findById(enrolmentRequest.getStudentId())
-                .orElseThrow(() -> new StudentNotFoundException("Studentul nu a fost găsit"));
-
+                .orElseThrow(() -> new StudentNotFoundException());
+//
         Course course = courseRepository.findById(enrolmentRequest.getCourseId())
-                .orElseThrow(() -> new CourseNotFoundException("Cursul cu ID-ul nu a fost găsit"));
+                .orElseThrow(() -> new CourseNotFoundException());
+        if(enrolmentRepository.existsByStudentIdAndCourseId(student.getId(), course.getId())){
+            throw new EnrolmentAlreadyExistsException();
+        }
+
 
         Enrolment enrolment = new Enrolment();
         enrolment.setStudent(student);
@@ -51,7 +56,7 @@ public class EnrolmentCommandServiceImpl implements EnrolmnetCommandService {
     @Transactional
     public EnrolmentResponse updateEnrolment(Long id, EnrolmentRequest enrolmentRequest) {
         Enrolment e = enrolmentRepository.findById(id)
-                .orElseThrow(() -> new EnrolmentNotFoundException("Enrolment not found"));
+                .orElseThrow(() -> new EnrolmentNotFoundException());
         return EnrolmentMapper.toDto(enrolmentRepository.save(e));
     }
 
@@ -60,7 +65,7 @@ public class EnrolmentCommandServiceImpl implements EnrolmnetCommandService {
    @Transactional
     public EnrolmentResponse deleteEnrolment(Long id) {
        if(!enrolmentRepository.existsById(id)){
-           throw new EnrolmentNotFoundException("Enrolment not found");
+           throw new EnrolmentNotFoundException();
        }
       enrolmentRepository.deleteById(id);
        return null;
@@ -70,16 +75,16 @@ public class EnrolmentCommandServiceImpl implements EnrolmnetCommandService {
     @Transactional
     public EnrolmentResponse patchEnrolment(Long id, EnrolmentPatchRequest enrolmentRequest) {
         Enrolment enrolment = enrolmentRepository.findById(id)
-                .orElseThrow(() -> new EnrolmentNotFoundException("Înscrierea nu a fost găsită"));
+                .orElseThrow(() -> new EnrolmentNotFoundException());
         if(enrolmentRequest.studentId()!=null){
             Student student = studentRepository.findById(enrolmentRequest.studentId())
-                    .orElseThrow(() -> new StudentNotFoundException("Studentul nou nu există"));
+                    .orElseThrow(() -> new StudentNotFoundException());
             enrolment.setStudent(student);
 
         }
         if(enrolmentRequest.courseId()!=null){
             Course course = courseRepository.findById(enrolmentRequest.courseId())
-                    .orElseThrow(() -> new CourseNotFoundException("Cursul nou nu există"));
+                    .orElseThrow(() -> new CourseNotFoundException());
             enrolment.setCourse(course);
 
 

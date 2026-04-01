@@ -2,6 +2,7 @@ package ro.mycode.sebischool.student.service.commandService;
 
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import ro.mycode.sebischool.student.exceptions.InvalidStudentAgeException;
 import ro.mycode.sebischool.student.exceptions.StudentAlreadyExistsException;
 import ro.mycode.sebischool.student.exceptions.StudentNotFoundException;
 import ro.mycode.sebischool.student.model.Student;
@@ -25,8 +26,11 @@ public class StudentCommandServiceImpl implements StudentCommandService {
     @Transactional
     public StudentSummaryResponse addStudent(StudentRequest studentRequest) {
         studentRepository.findByEmail(studentRequest.getEmail()).ifPresent(student -> {
-            throw new StudentAlreadyExistsException("Student already exists");
+            throw new StudentAlreadyExistsException();
         });
+        if(studentRequest.getAge()>100){
+            throw new InvalidStudentAgeException();
+        }
 
         Student student = StudentMapper.StudentRequesttoStudent(studentRequest);
         Student savedStudent = studentRepository.save(student);
@@ -35,9 +39,9 @@ public class StudentCommandServiceImpl implements StudentCommandService {
 
     @Override
     @Transactional
-    public StudentSummaryResponse updateStudent(Long id, StudentRequest studentRequest) {
-        Student s = studentRepository.findById(id)
-                .orElseThrow(() -> new StudentNotFoundException("Student not found"));
+    public StudentSummaryResponse updateStudent( StudentRequest studentRequest) {
+        Student s = studentRepository.findByEmail(studentRequest.getEmail())
+                .orElseThrow(() -> new StudentNotFoundException());
         s.setFirstName(studentRequest.getFirstName());
         s.setLastName(studentRequest.getLastName());
         s.setEmail(studentRequest.getEmail());
@@ -50,7 +54,7 @@ public class StudentCommandServiceImpl implements StudentCommandService {
     @Transactional
     public void deleteStudent(Long id) {
         if (!studentRepository.existsById(id)) {
-            throw new StudentNotFoundException("Student not found");
+            throw new StudentNotFoundException();
         }
         studentRepository.deleteById(id);
     }
@@ -59,7 +63,7 @@ public class StudentCommandServiceImpl implements StudentCommandService {
     @Transactional
     public StudentSummaryResponse updatePatchStudent(Long id, StudentPatchRequest studentRequest) {
         Student s = studentRepository.findById(id)
-                .orElseThrow(() -> new StudentNotFoundException("Student not found"));
+                .orElseThrow(() -> new StudentNotFoundException());
 
         if (studentRequest.firstName() != null) {
             s.setFirstName(studentRequest.firstName());

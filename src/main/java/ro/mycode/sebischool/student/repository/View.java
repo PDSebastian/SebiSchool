@@ -8,7 +8,7 @@ import ro.mycode.sebischool.books.dtos.Bookrequest;
 import ro.mycode.sebischool.books.mapper.BookMapper;
 import ro.mycode.sebischool.course.model.Course;
 import ro.mycode.sebischool.course.repository.CourseRepository;
-import ro.mycode.sebischool.course.service.mapper.CourseMapper;
+import ro.mycode.sebischool.course.mapper.CourseMapper;
 import ro.mycode.sebischool.student.exceptions.StudentNotFoundException;
 import ro.mycode.sebischool.student.model.Student;
 import ro.mycode.sebischool.student.service.commandService.StudentCommandService;
@@ -59,11 +59,11 @@ public class View {
             studentRepository.deleteById(1L);
         }
         else{
-            throw new StudentNotFoundException("Student not found");
+            throw new StudentNotFoundException();
         }
    }
    void testUpdateStudent(){
-        Student s=studentRepository.findById(2L).orElseThrow(()->new StudentNotFoundException("Student not found"));
+        Student s=studentRepository.findById(2L).orElseThrow(()->new StudentNotFoundException());
         s.setFirstName("dsdsdsdsd");
         s.setLastName("sdfsdsdf");
         s.setAge(40);
@@ -91,10 +91,10 @@ public class View {
             bookCommandService.deleteBook(10L);
         }
         else{
-            throw new BookNotFoundException("Book not found");
+            throw new BookNotFoundException();
         }
    }void testUpdateBook(){
-        Book b=bookRepository.findById(11L).orElseThrow(()->new BookNotFoundException("Book not found"));
+        Book b=bookRepository.findById(11L).orElseThrow(()->new BookNotFoundException());
         b.setBookName("test");
         b.setCreatedAt(LocalDateTime.now());
         Book updated=bookRepository.save(b);
