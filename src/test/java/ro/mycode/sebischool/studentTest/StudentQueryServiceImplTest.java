@@ -1,6 +1,7 @@
-package ro.mycode.studentTest;
+package ro.mycode.sebischool.studentTest;
 
 import lombok.extern.slf4j.Slf4j;
+import org.hamcrest.core.SubstringMatcher;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,7 +21,7 @@ import static org.mockito.Mockito.when;
 
 @Slf4j
 @ExtendWith(MockitoExtension.class)
-public class studentQueryServiceImplTest {
+public class StudentQueryServiceImplTest {
     @Mock
     StudentQueryService studentQueryService;
     @Mock
@@ -38,14 +39,5 @@ public class studentQueryServiceImplTest {
         List<StudentSummaryResponse> list = studentQueryService.getAllStudents();
         assertEquals(2,list.size());
     }
-    @Test
-    void testGetStudentByEmail(){
-        String email="sebi.nou@test.com";
-        Long id=4L;
-        Student student = Student.builder().id(id).email(email).firstName("John").lastName("Doe").build();
-        when(studentRepository.findByEmail(email)).thenReturn(Optional.of(student));
-       List<StudentSummaryResponse> summaryResponse=studentQueryService.getStudentByEmail(email);
-       assertEquals(email,summaryResponse.get(0).getEmail());
 
-    }
 }

@@ -1,4 +1,4 @@
-package ro.mycode.sebischool;
+package ro.mycode.sebischool.courseTest;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ro.mycode.sebischool.books.model.Book;
 import ro.mycode.sebischool.course.dtos.CourseSummaryResponse;
 import ro.mycode.sebischool.course.model.Course;
 import ro.mycode.sebischool.course.repository.CourseRepository;

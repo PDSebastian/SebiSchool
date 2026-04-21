@@ -1,13 +1,14 @@
 package ro.mycode.sebischool.student.dtos;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.stereotype.Service;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
+@Builder
+@Service
+@Getter
 public class StudentSummaryResponse {
     private long id;
     private String firstName;

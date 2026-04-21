@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ro.mycode.sebischool.enrolment.service.commanService.EnrolmnetCommandService;
+import ro.mycode.sebischool.enrolment.service.commanService.EnrolmentCommandService;
 import ro.mycode.sebischool.enrolment.dtos.EnrolmentPatchRequest;
 import ro.mycode.sebischool.enrolment.dtos.EnrolmentRequest;
 import ro.mycode.sebischool.enrolment.dtos.EnrolmentResponse;
@@ -18,35 +18,35 @@ import java.util.List;
 @RequestMapping("/api/v2/enrolment")
 @Slf4j
 public class EnrolmentController {
-    private EnrolmnetCommandService  enrolmnetCommandService;
+    private EnrolmentCommandService enrolmentCommandService;
     private EnrolmentQueryService enrolmentQueryService;
-    public EnrolmentController(EnrolmnetCommandService enrolmnetCommandService, EnrolmentQueryService enrolmentQueryService) {
-        this.enrolmnetCommandService = enrolmnetCommandService;
+    public EnrolmentController(EnrolmentCommandService enrolmentCommandService, EnrolmentQueryService enrolmentQueryService) {
+        this.enrolmentCommandService = enrolmentCommandService;
         this.enrolmentQueryService = enrolmentQueryService;
 
     }
     @PostMapping("/add")
     public ResponseEntity<EnrolmentResponse> addEnrolment(@Valid @RequestBody EnrolmentRequest enrolmentRequest) {
         log.debug("http post /api/v2/enrolment/add");
-        EnrolmentResponse response = enrolmnetCommandService.addEnrolment(enrolmentRequest);
+        EnrolmentResponse response = enrolmentCommandService.addEnrolment(enrolmentRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<EnrolmentResponse> deleteEnrolment(@PathVariable Long id) {
         log.debug("http delete /api/v2/enrolment/delete/{}", id);
-        EnrolmentResponse response = enrolmnetCommandService.deleteEnrolment(id);
+        EnrolmentResponse response = enrolmentCommandService.deleteEnrolment(id);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
     @PatchMapping("/patch/{id}")
     public ResponseEntity<EnrolmentResponse> patchEnrolment(@PathVariable Long id, @RequestBody EnrolmentPatchRequest request) {
         log.debug("http patch /api/v2/enrolment/patch/{}", id);
-        EnrolmentResponse response = enrolmnetCommandService.patchEnrolment(id, request);
+        EnrolmentResponse response = enrolmentCommandService.patchEnrolment(id, request);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
     @PutMapping("/update/{id}")
     public ResponseEntity<EnrolmentResponse> updateEnrolment(@PathVariable Long id, @Valid @RequestBody EnrolmentRequest request) {
         log.debug("http put /api/v2/enrolment/update/{}", id);
-        EnrolmentResponse response = enrolmnetCommandService.updateEnrolment(id, request);
+        EnrolmentResponse response = enrolmentCommandService.updateEnrolment(id, request);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
     @GetMapping("/all")

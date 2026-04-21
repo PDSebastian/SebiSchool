@@ -19,6 +19,4 @@ public class Bookrequest {
 
     @NotNull(message = "Data este obligatorie")
     private LocalDateTime createdAt;
-
-    private Long studentId;
 }

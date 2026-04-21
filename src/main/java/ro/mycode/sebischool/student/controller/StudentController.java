@@ -66,12 +66,7 @@ public class StudentController {
         StudentDetailResponse s= studentQueryService.getStudentById(id);
         return ResponseEntity.status(HttpStatus.OK).body(s);
     }
-//    @GetMapping("{id}/enrolments")
-//    public ResponseEntity<StudentDetailResponse> getStudentWithEnrolments(@PathVariable Long id) {
-//        log.debug("http get /api/v2/student/enrolments/{}", id);
-//        StudentSummaryResponse s= studentQueryService.getStudentWithEnrolments(id);
-//        return ResponseEntity.status(HttpStatus.OK).body(s);
-//    }
+
 
 
 

@@ -33,7 +33,7 @@ public class StudentQueryServiceImpl implements StudentQueryService{
     }
 
     @Override
-    public Optional<StudentSummaryResponse> getStudentByEmail(String email) {
+    public List<StudentSummaryResponse> getStudentByEmail(String email) {
 //        return studentRepository.findByEmail(email).map(student -> studentMapper.toDto(student));
         return null;
     }

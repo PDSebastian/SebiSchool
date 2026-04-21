@@ -34,7 +34,7 @@ public class BookQueryServiceImpl implements BookQueryService {
        if(book.isPresent()){
            return BookMapper.toDto(book.get());
        }
-       throw  new BookNotFoundException();
+     throw   new BookNotFoundException();
     }
 
 

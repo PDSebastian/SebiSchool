@@ -1,4 +1,4 @@
-package ro.mycode.studentTest;
+package ro.mycode.sebischool.studentTest;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +23,7 @@ import static org.mockito.Mockito.when;
 
 @Slf4j
 @ExtendWith(MockitoExtension.class)
-public class studentCommandServiceImplTest {
+public class StudentCommandServiceImplTest {
 
     @Mock
     StudentRepository studentRepository;

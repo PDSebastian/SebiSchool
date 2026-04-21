@@ -17,7 +17,7 @@ public class StudentCommandServiceImpl implements StudentCommandService {
     StudentRepository studentRepository;
 
 
-    StudentCommandServiceImpl(StudentRepository studentRepository ) {
+    public StudentCommandServiceImpl(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
 

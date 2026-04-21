@@ -20,7 +20,7 @@ import ro.mycode.sebischool.student.repository.StudentRepository;
 import java.time.LocalDateTime;
 
 @Component
-public class EnrolmentCommandServiceImpl implements EnrolmnetCommandService {
+public class EnrolmentCommandServiceImpl implements EnrolmentCommandService {
     EnrolmentRepository enrolmentRepository;
     StudentRepository studentRepository;
     CourseRepository courseRepository;

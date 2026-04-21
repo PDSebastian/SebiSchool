@@ -15,4 +15,6 @@ public interface EnrolmentRepository extends JpaRepository<Enrolment,Long> {
 
 
     int countByCourseId(Long id);
+
+
 }

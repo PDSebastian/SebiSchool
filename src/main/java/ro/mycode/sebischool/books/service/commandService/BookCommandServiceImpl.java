@@ -19,15 +19,15 @@ public class BookCommandServiceImpl implements BookCommandService {
     private final StudentRepository studentRepository;
     BookRepository bookRepository;
 
-    BookCommandServiceImpl(BookRepository bookRepository,  StudentRepository studentRepository) {
+    public BookCommandServiceImpl(BookRepository bookRepository,StudentRepository studentRepository) {
         this.bookRepository = bookRepository;
-        this.studentRepository = studentRepository;
+        this.studentRepository=studentRepository;
     }
     @Override
     @Transactional
     public BookResponse addBook(Long studentId, Bookrequest bookRequest) {
         Student student = studentRepository.findById(studentId)
-                .orElseThrow(() -> new StudentNotFoundException());
+                .orElseThrow(StudentNotFoundException::new);
 
         if(bookRepository.existsByBookName(bookRequest.getBookName())){
             throw new BookAlreadyExistsException();

@@ -1,4 +1,4 @@
-package ro.mycode.sebischool;
+package ro.mycode.sebischool.booksTest;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;

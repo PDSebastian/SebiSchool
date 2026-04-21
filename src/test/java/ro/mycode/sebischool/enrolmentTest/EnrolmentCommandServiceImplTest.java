@@ -15,7 +15,7 @@ import ro.mycode.sebischool.enrolment.exceptions.EnrolmentNotFoundException;
 import ro.mycode.sebischool.enrolment.model.Enrolment;
 import ro.mycode.sebischool.enrolment.repository.EnrolmentRepository;
 import ro.mycode.sebischool.enrolment.service.commanService.EnrolmentCommandServiceImpl;
-import ro.mycode.sebischool.enrolment.service.commanService.EnrolmnetCommandService;
+import ro.mycode.sebischool.enrolment.service.commanService.EnrolmentCommandService;
 import ro.mycode.sebischool.student.model.Student;
 import ro.mycode.sebischool.student.repository.StudentRepository;
 
@@ -29,7 +29,7 @@ import static org.mockito.Mockito.when;
 
 @Slf4j
 @ExtendWith(MockitoExtension.class)
-public class enrolmentcommandservicetest {
+public class EnrolmentCommandServiceImplTest {
     @Mock
     EnrolmentRepository  enrolmentRepository;
     @Mock
@@ -37,7 +37,7 @@ public class enrolmentcommandservicetest {
     @Mock
     CourseRepository courseRepository;
 
-    EnrolmnetCommandService enrolmentCommandService;
+    EnrolmentCommandService enrolmentCommandService;
 
     @BeforeEach
     public void setup() {

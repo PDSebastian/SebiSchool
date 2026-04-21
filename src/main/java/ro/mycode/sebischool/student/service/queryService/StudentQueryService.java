@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface StudentQueryService {
     List<StudentSummaryResponse> getAllStudents();
-    Optional<StudentSummaryResponse> getStudentByEmail(String email);
+    List<StudentSummaryResponse> getStudentByEmail(String email);
     Optional<StudentSummaryResponse> getStudentByFirstNameAndLastName(String firstName, String lastName);
 
     StudentDetailResponse getStudentById(Long studentID);
