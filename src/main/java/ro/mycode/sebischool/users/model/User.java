@@ -2,9 +2,6 @@ package ro.mycode.sebischool.users.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import ro.mycode.sebischool.student.dtos.StudentDetailResponse;
-
-import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -22,8 +19,6 @@ public class User {
     String  lastName;
     String  email;
     String  password;
-
-    List<StudentDetailResponse> studentDetailResponses;
 
 
     @Override

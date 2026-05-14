@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import ro.mycode.sebischool.books.controller.BookController;
 import ro.mycode.sebischool.books.dtos.BookPatchRequest;
@@ -31,17 +31,17 @@ public class BooksControllerTests {
     @Autowired
     private MockMvc mockMvc;
 
-   @MockitoBean
+   @MockBean
     private BookRepository bookRepository;
 
     @Autowired
     private ObjectMapper objectMapper;
-    @MockitoBean
+    @MockBean
     private StudentRepository studentRepository;
-    @MockitoBean
+    @MockBean
     private BookCommandService  bookCommandService;
 
-    @MockitoBean
+    @MockBean
     private BookQueryService bookQueryService;
 
 

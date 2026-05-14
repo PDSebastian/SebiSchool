@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import ro.mycode.sebischool.student.controller.StudentController;
 import ro.mycode.sebischool.student.dtos.*;
@@ -28,10 +28,10 @@ public class StudentControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @MockitoBean
+    @MockBean
     private StudentCommandService studentCommandService;
 
-    @MockitoBean
+    @MockBean
     private StudentQueryService studentQueryService;
 
     @Test
@@ -116,10 +116,14 @@ public class StudentControllerTest {
     @Test
     void testGetStudentDetailsReturnsOk() throws Exception {
         Long studentId = 1L;
-        StudentDetailResponse response = StudentDetailResponse.builder()
-                .Id(studentId)
-                .email("test@gmail.com")
-                .build();
+        StudentDetailResponse response = new StudentDetailResponse(
+                studentId,
+                null,
+                null,
+                "test@gmail.com",
+                List.of(),
+                List.of()
+        );
 
 
         when(studentQueryService.getStudentById(studentId)).thenReturn(response);

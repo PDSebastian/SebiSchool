@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import ro.mycode.sebischool.enrolment.controller.EnrolmentController;
 import ro.mycode.sebischool.enrolment.dtos.EnrolmentRequest;
@@ -32,10 +32,10 @@ public class enrollmentControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @MockitoBean
+    @MockBean
     private EnrolmentCommandService enrolmentCommandService;
 
-    @MockitoBean
+    @MockBean
     private EnrolmentQueryService enrolmentQueryService;
 
     @Test

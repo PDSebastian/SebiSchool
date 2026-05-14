@@ -5,12 +5,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import ro.mycode.sebischool.student.controller.StudentController;
 import ro.mycode.sebischool.student.dtos.StudentDetailResponse;
 import ro.mycode.sebischool.student.dtos.StudentRequest;
-import ro.mycode.sebischool.student.dtos.StudentSummaryResponse;
 import ro.mycode.sebischool.student.dtos.StudentSummaryResponse;
 import ro.mycode.sebischool.student.service.commandService.StudentCommandService;
 import ro.mycode.sebischool.student.service.queryService.StudentQueryService;
@@ -32,10 +31,10 @@ public class studentControllerTest{
     @Autowired
     private ObjectMapper objectMapper;
 
-    @MockitoBean
+    @MockBean
     private StudentCommandService studentCommandService;
 
-    @MockitoBean
+    @MockBean
     private StudentQueryService studentQueryService;
 
     @Test
@@ -90,8 +89,14 @@ public class studentControllerTest{
     void getStudentByIdReturnsOk() throws Exception {
         String firstname="AAA";
         Long Id = 1L;
-        StudentDetailResponse response = StudentDetailResponse.builder()
-                .Id(Id).firstName(firstname).build();
+        StudentDetailResponse response = new StudentDetailResponse(
+                Id,
+                firstname,
+                null,
+                null,
+                List.of(),
+                List.of()
+        );
 
         when(studentQueryService.getStudentById(Id)).thenReturn(response);
 
