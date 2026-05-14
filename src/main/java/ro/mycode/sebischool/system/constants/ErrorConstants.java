@@ -15,5 +15,6 @@ public class ErrorConstants {
 
     public static final String  ENROLMENT_ALREADY_EXISTS_ERROR = "Enrollment Already Exists";
     public static final String  ENROLMENT_NOT_FOUND_ERROR = "Enrollment does not exist";
+    public static final String EMAIL_ALREADY_EXISTS_ERROR = "Email Already Exists";
 
 }

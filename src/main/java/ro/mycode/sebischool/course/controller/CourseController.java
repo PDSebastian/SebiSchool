@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v2/course/")
 @Slf4j
-public class CourseController {
+public class    CourseController {
     private CourseCommandService courseCommandService;
     private CourseQueryService courseQueryService;
     public CourseController(CourseCommandService courseCommandService, CourseQueryService courseQueryService) {

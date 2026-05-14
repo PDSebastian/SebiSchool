@@ -1,4 +1,4 @@
-package ro.mycode.sebischool.integration;
+package ro.mycode.sebischool.integration.controllerTests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;

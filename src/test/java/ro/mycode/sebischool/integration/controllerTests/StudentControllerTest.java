@@ -1,4 +1,4 @@
-package ro.mycode.sebischool.integration;
+package ro.mycode.sebischool.integration.controllerTests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,6 @@ import ro.mycode.sebischool.student.service.queryService.StudentQueryService;
 import java.util.List;
 
 import static org.mockito.Mockito.when;
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

@@ -45,8 +45,7 @@ public class StudentMapper {
                 student.getLastName(),
                 student.getEmail(),
                 student.getEnrolments().stream().map(enrolment -> CourseMapper.toDto(enrolment.getCourse())).toList(),
-                student.getBooks().stream().map(BookMapper::toDto).toList()
-        );
+                student.getBooks().stream().map(BookMapper::toDto).toList());
 
     }
 

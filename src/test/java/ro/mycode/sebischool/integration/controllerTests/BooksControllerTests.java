@@ -1,34 +1,23 @@
-package ro.mycode.sebischool.integration;
+package ro.mycode.sebischool.integration.controllerTests;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import ro.mycode.sebischool.books.controller.BookController;
 import ro.mycode.sebischool.books.dtos.BookPatchRequest;
 import ro.mycode.sebischool.books.dtos.BookResponse;
 import ro.mycode.sebischool.books.dtos.Bookrequest;
-import ro.mycode.sebischool.books.model.Book;
 import ro.mycode.sebischool.books.repository.BookRepository;
 import ro.mycode.sebischool.books.service.commandService.BookCommandService;
 import ro.mycode.sebischool.books.service.queryService.BookQueryService;
-import ro.mycode.sebischool.student.model.Student;
 import ro.mycode.sebischool.student.repository.StudentRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -59,18 +48,18 @@ public class BooksControllerTests {
 
     @BeforeEach
     public void cleanDataBase(){
-//        bookRepository.deleteAll();
+        bookRepository.deleteAll();
     }
 
     @Test
     void testAddBookReturnOk() throws Exception {
         Long studentId=10L;
         Bookrequest request = Bookrequest.builder()
-                .bookName("Clean Code")
+                .bookName("aaaa")
                 .createdAt(LocalDateTime.now())
                 .build();
 
-        BookResponse response = new BookResponse(1L, "Clean Code", LocalDateTime.now());
+        BookResponse response = new BookResponse(1L, "aaaa", LocalDateTime.now());
 
         when(bookCommandService.addBook(studentId,request)).thenReturn(response);
 
@@ -79,7 +68,7 @@ public class BooksControllerTests {
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1L))
-                .andExpect(jsonPath("$.bookName").value("Clean Code"));
+                .andExpect(jsonPath("$.bookName").value("aaaa"));
 
     }
     @Test

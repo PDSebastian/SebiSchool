@@ -11,6 +11,7 @@ import ro.mycode.sebischool.course.exceptions.CourseFullException;
 import ro.mycode.sebischool.course.exceptions.CourseNotFoundException;
 import ro.mycode.sebischool.enrolment.exceptions.EnrolmentAlreadyExistsException;
 import ro.mycode.sebischool.enrolment.exceptions.EnrolmentNotFoundException;
+import ro.mycode.sebischool.student.exceptions.EmailAlreadyExistsException;
 import ro.mycode.sebischool.student.exceptions.InvalidStudentAgeException;
 import ro.mycode.sebischool.student.exceptions.StudentAlreadyExistsException;
 import ro.mycode.sebischool.student.exceptions.StudentNotFoundException;
@@ -28,8 +29,7 @@ public class GlobalExceptionsHandler {
     public ResponseEntity<ApiErrorResponse> handleBadRequest(RuntimeException e) {
             ApiErrorResponse apiErrorResponse=ApiErrorResponse.builder()
                     .message(e.getMessage())
-                    .state(HttpStatus.BAD_REQUEST.value())
-                    .dateTime(LocalDateTime.now())
+                    .status(HttpStatus.BAD_REQUEST.value())
                     .build();
 
             return  ResponseEntity.status(HttpStatus.CONFLICT).body(apiErrorResponse);
@@ -39,15 +39,15 @@ public class GlobalExceptionsHandler {
             StudentAlreadyExistsException.class,
             CourseAlreadyExistsException.class,
             EnrolmentAlreadyExistsException.class,
-            BookAlreadyExistsException.class
+            BookAlreadyExistsException.class,
+            EmailAlreadyExistsException.class
 
 
     })
     public ResponseEntity<ApiErrorResponse> handleConflict(RuntimeException e) {
         ApiErrorResponse apiErrorResponse=ApiErrorResponse.builder()
                 .message(e.getMessage())
-                .state(HttpStatus.BAD_REQUEST.value())
-                .dateTime(LocalDateTime.now())
+                .status(HttpStatus.BAD_REQUEST.value())
                 .build();
         return  ResponseEntity.status(HttpStatus.CONFLICT).body(apiErrorResponse);
     }
@@ -60,10 +60,10 @@ public class GlobalExceptionsHandler {
     public ResponseEntity<ApiErrorResponse> handleInvalidStudentAge(RuntimeException e) {
         ApiErrorResponse apiErrorResponse=ApiErrorResponse.builder()
                 .message(e.getMessage())
-                .state(HttpStatus.BAD_REQUEST.value())
-                .dateTime(LocalDateTime.now())
+                .status(HttpStatus.BAD_REQUEST.value())
                 .build();
         return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiErrorResponse);
     }
+
 
 }
