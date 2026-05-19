@@ -16,5 +16,6 @@ public class HintsConstants {
    public static final String ENROLMENT_ALREADY_EXISTS_HINT_MESSAGE = "Try change studentid/courseid";
    public static final String ENROLMENT_NOT_FOUND_HINT_MESSAGE = "Try another studentid/courseid ";
    public static final String EMAIL_ALREADY_EXISTS_HINT_MESSAGE = "Try another email";
+   public static final String EMAIL_NOT_FOUND_HINT_MESSAGE = "Try another email ";
 
 }

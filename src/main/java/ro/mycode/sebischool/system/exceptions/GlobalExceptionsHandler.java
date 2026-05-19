@@ -15,7 +15,7 @@ import ro.mycode.sebischool.student.exceptions.EmailAlreadyExistsException;
 import ro.mycode.sebischool.student.exceptions.InvalidStudentAgeException;
 import ro.mycode.sebischool.student.exceptions.StudentAlreadyExistsException;
 import ro.mycode.sebischool.student.exceptions.StudentNotFoundException;
-import java.time.LocalDateTime;
+import ro.mycode.sebischool.users.exceptions.UserNotFoundException;
 
 @RestControllerAdvice
 public class GlobalExceptionsHandler {
@@ -23,7 +23,8 @@ public class GlobalExceptionsHandler {
             StudentNotFoundException.class,
             BookNotFoundException.class,
             EnrolmentNotFoundException.class,
-            CourseNotFoundException.class
+            CourseNotFoundException.class,
+            UserNotFoundException.class
 
     })
     public ResponseEntity<ApiErrorResponse> handleBadRequest(RuntimeException e) {
