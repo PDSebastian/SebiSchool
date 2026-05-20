@@ -15,6 +15,7 @@ import ro.mycode.sebischool.student.exceptions.EmailAlreadyExistsException;
 import ro.mycode.sebischool.student.exceptions.InvalidStudentAgeException;
 import ro.mycode.sebischool.student.exceptions.StudentAlreadyExistsException;
 import ro.mycode.sebischool.student.exceptions.StudentNotFoundException;
+import ro.mycode.sebischool.users.exceptions.UserAlreadyExistsException;
 import ro.mycode.sebischool.users.exceptions.UserNotFoundException;
 
 @RestControllerAdvice
@@ -41,7 +42,8 @@ public class GlobalExceptionsHandler {
             CourseAlreadyExistsException.class,
             EnrolmentAlreadyExistsException.class,
             BookAlreadyExistsException.class,
-            EmailAlreadyExistsException.class
+            EmailAlreadyExistsException.class,
+            UserAlreadyExistsException.class,
 
 
     })

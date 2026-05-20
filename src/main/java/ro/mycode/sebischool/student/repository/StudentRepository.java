@@ -22,4 +22,6 @@ public interface StudentRepository extends JpaRepository<Student,Long> {
     @EntityGraph(attributePaths = {"enrolments", "enrolments.course", "books"})
     @Query("SELECT s FROM Student s WHERE s.id = :studentID")
     Optional<Student> findStudentById(@Param("studentID") Long studentID);
+
+    boolean existsByEmail(String email);
 }
