@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ro.mycode.sebischool.auth.authService.AuthService;
+import ro.mycode.sebischool.auth.dtos.AuthLoginResponse;
 import ro.mycode.sebischool.users.dtos.UserRequest;
 import ro.mycode.sebischool.users.dtos.UserResponse;
 
@@ -27,8 +28,11 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.CREATED).body(authService.register(request));
     }
 
-//    @PostMapping("/login")
-//    public ResponseEntity<AuthLoginResponse> login(@Valid @RequestBody AuthLoginRequest request) {
-//        return ResponseEntity.ok(authService.login(request));
-//    }
+    @PostMapping("/login")
+    public ResponseEntity<AuthLoginResponse> login(@Valid @RequestBody UserRequest request) {
+        return ResponseEntity.ok(authService.login(request));
+    }
+
+
+
 }
