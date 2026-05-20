@@ -5,9 +5,20 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public enum UserPermissions {
-    USER_EDIT("USER_EDIT"),
-    USER_DELELTE("USER_DELELTE"),
-    USER_ADD("USER_ADD");
+
+
+    COURSE_READ("COURSE_READ"),
+    COURSE_WRITE("COURSE_WRITE"),
+    COURSE_DELETE("COURSE_DELETE"),
+    COURSE_ADD("COURSE_ADD"),
+    COURSE_EDIT("COURSE_EDIT"),
+
+    ENROLMENT_DELETE("ENROLMENT_DELETE"),
+    ENROLMENT_ADD("ENTOLMENT_ADD");
+
+
+
+
 
     private final String permission;
     public String getPermission() {
