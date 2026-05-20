@@ -14,7 +14,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/v2/student")
+@RequestMapping("/api/v2/students")
 @Slf4j
 public class StudentController {
     private StudentCommandService studentCommandService;
@@ -23,46 +23,46 @@ public class StudentController {
         this.studentCommandService = studentCommandService;
         this.studentQueryService = studentQueryService;
     }
-    @PostMapping("/add")
+    @PostMapping("")
     public ResponseEntity<StudentSummaryResponse> addStudent(@Valid @RequestBody StudentRequest studentRequest) {
-        log.debug("http post /api/v2/students/add");
+        log.debug("http post /api/v2/students");
         StudentSummaryResponse s = studentCommandService.addStudent(studentRequest);
-        return ResponseEntity.status(HttpStatus.OK).body(s);
+        return ResponseEntity.status(HttpStatus.CREATED).body(s);
     }
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteStudent(@PathVariable Long id) {
-        log.debug("http delete /api/v2/student/delete/{}", id);
+        log.debug("http delete /api/v2/students/{}", id);
         studentCommandService.deleteStudent(id);
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return ResponseEntity.noContent().build();
     }
-    @PatchMapping("/patch/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<StudentSummaryResponse> patchStudent(@PathVariable Long id, @Valid @RequestBody StudentPatchRequest studentPatchRequest) {
-        log.debug("http patch /api/v2/student/patch/{}", id);
+        log.debug("http patch /api/v2/students/{}", id);
         StudentSummaryResponse s = studentCommandService.updatePatchStudent(id, studentPatchRequest);
         return ResponseEntity.status(HttpStatus.OK).body(s);
     }
-    @PutMapping("/update/{id}")
-    public ResponseEntity<StudentSummaryResponse> updateStudent(@PathVariable String email, @Valid @RequestBody StudentRequest studentRequest) {
-        log.debug("http put /api/v2/student/update/{}", email);
-        StudentSummaryResponse s = studentCommandService.updateStudent(studentRequest);
+    @PutMapping("/{id}")
+    public ResponseEntity<StudentSummaryResponse> updateStudent(@PathVariable Long id, @Valid @RequestBody StudentRequest studentRequest) {
+        log.debug("http put /api/v2/students/{}", id);
+        StudentSummaryResponse s = studentCommandService.updateStudent(id, studentRequest);
         return ResponseEntity.status(HttpStatus.OK).body(s);
     }
-    @GetMapping("/all")
+    @GetMapping("")
     public ResponseEntity<List<StudentSummaryResponse>> getAllStudents() {
-        log.debug("http get /api/v2/student/all");
+        log.debug("http get /api/v2/students");
         List<StudentSummaryResponse> students = studentQueryService.getAllStudents();
         return ResponseEntity.status(HttpStatus.OK).body(students);
     }
 
-    @GetMapping("/firstName/{firstName}")
+    @GetMapping("/by-first-name/{firstName}")
     public ResponseEntity<List<StudentSummaryResponse>> getStudentByFirstName(@PathVariable String firstName) {
-        log.debug("http get /api/v2/student/firstName/{}", firstName);
+        log.debug("http get /api/v2/students/by-first-name/{}", firstName);
         List<StudentSummaryResponse> students = studentQueryService.getStudentsByFirstName(firstName);
         return ResponseEntity.status(HttpStatus.OK).body(students);
     }
-    @GetMapping("/{id}/getStudentById")
+    @GetMapping("/{id}")
     public ResponseEntity<StudentDetailResponse> getStudentDetails(@PathVariable Long id) {
-        log.debug("http get /api/v2/student/details/{}", id);
+        log.debug("http get /api/v2/students/{}", id);
         StudentDetailResponse s= studentQueryService.getStudentById(id);
         return ResponseEntity.status(HttpStatus.OK).body(s);
     }

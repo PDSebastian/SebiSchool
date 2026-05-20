@@ -39,8 +39,8 @@ public class StudentCommandServiceImpl implements StudentCommandService {
 
     @Override
     @Transactional
-    public StudentSummaryResponse updateStudent( StudentRequest studentRequest) {
-        Student s = studentRepository.findByEmail(studentRequest.getEmail())
+    public StudentSummaryResponse updateStudent(Long id, StudentRequest studentRequest) {
+        Student s = studentRepository.findById(id)
                 .orElseThrow(() -> new StudentNotFoundException());
         s.setFirstName(studentRequest.getFirstName());
         s.setLastName(studentRequest.getLastName());

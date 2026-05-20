@@ -15,7 +15,7 @@ import ro.mycode.sebischool.student.dtos.StudentSummaryResponse;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v2/enrolment")
+@RequestMapping("/api/v2/enrolments")
 @Slf4j
 public class EnrolmentController {
     private EnrolmentCommandService enrolmentCommandService;
@@ -25,48 +25,46 @@ public class EnrolmentController {
         this.enrolmentQueryService = enrolmentQueryService;
 
     }
-    @PostMapping("/add")
+    @PostMapping("")
     public ResponseEntity<EnrolmentResponse> addEnrolment(@Valid @RequestBody EnrolmentRequest enrolmentRequest) {
-        log.debug("http post /api/v2/enrolment/add");
+        log.debug("http post /api/v2/enrolments");
         EnrolmentResponse response = enrolmentCommandService.addEnrolment(enrolmentRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<EnrolmentResponse> deleteEnrolment(@PathVariable Long id) {
-        log.debug("http delete /api/v2/enrolment/delete/{}", id);
+        log.debug("http delete /api/v2/enrolments/{}", id);
         EnrolmentResponse response = enrolmentCommandService.deleteEnrolment(id);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
-    @PatchMapping("/patch/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<EnrolmentResponse> patchEnrolment(@PathVariable Long id, @RequestBody EnrolmentPatchRequest request) {
-        log.debug("http patch /api/v2/enrolment/patch/{}", id);
+        log.debug("http patch /api/v2/enrolments/{}", id);
         EnrolmentResponse response = enrolmentCommandService.patchEnrolment(id, request);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<EnrolmentResponse> updateEnrolment(@PathVariable Long id, @Valid @RequestBody EnrolmentRequest request) {
-        log.debug("http put /api/v2/enrolment/update/{}", id);
+        log.debug("http put /api/v2/enrolments/{}", id);
         EnrolmentResponse response = enrolmentCommandService.updateEnrolment(id, request);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
-    @GetMapping("/all")
+    @GetMapping("")
     public ResponseEntity<List<EnrolmentResponse>> getAllEnrolments() {
-        log.debug("http get /api/v2/enrolment/all");
+        log.debug("http get /api/v2/enrolments");
         List<EnrolmentResponse> response = enrolmentQueryService.getAllEnrolments();
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
-    @GetMapping("/course/{courseID}")
-    public ResponseEntity<List<EnrolmentResponse>> getEnrolmentsByStudent(@PathVariable Long courseID) {
-        log.debug("http get /api/v2/enrolment/student/{}", courseID);
-        List<EnrolmentResponse> response = enrolmentQueryService.getAllEnrolmentsByCourseId(courseID);
+    @GetMapping("/course/{courseId}")
+    public ResponseEntity<List<EnrolmentResponse>> getEnrolmentsByStudent(@PathVariable Long courseId) {
+        log.debug("http get /api/v2/enrolments/course/{}", courseId);
+        List<EnrolmentResponse> response = enrolmentQueryService.getAllEnrolmentsByCourseId(courseId);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
-    @GetMapping("course/{courseID}/students")
-    public ResponseEntity< List<StudentSummaryResponse> >getStudentsByCourseId(@PathVariable Long courseID) {
-        List<StudentSummaryResponse> response = enrolmentQueryService.getStudentsByCourseId(courseID);
+    @GetMapping("/course/{courseId}/students")
+    public ResponseEntity< List<StudentSummaryResponse> >getStudentsByCourseId(@PathVariable Long courseId) {
+        List<StudentSummaryResponse> response = enrolmentQueryService.getStudentsByCourseId(courseId);
         return ResponseEntity.status(HttpStatus.OK).body(response);
-
-
     }
 
 

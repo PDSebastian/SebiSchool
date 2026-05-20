@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import ro.mycode.sebischool.books.model.Book;
 import ro.mycode.sebischool.enrolment.model.Enrolment;
+import ro.mycode.sebischool.users.model.User;
 
 
 import java.util.HashSet;
@@ -36,6 +37,10 @@ public class Student {
 
     @NotNull(message = "Varsta obligatorie")
     private int age;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", unique = true)
+    private User user;
 
 
     @Override

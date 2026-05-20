@@ -14,7 +14,7 @@ import ro.mycode.sebischool.course.service.queryService.CourseQueryService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v2/course/")
+@RequestMapping("/api/v2/courses")
 @Slf4j
 public class    CourseController {
     private CourseCommandService courseCommandService;
@@ -24,46 +24,46 @@ public class    CourseController {
         this.courseQueryService = courseQueryService;
 
     }
-    @PostMapping("/add")
+    @PostMapping("")
     public ResponseEntity<CourseSummaryResponse> addCourse(@Valid @RequestBody CourseRequest courseRequest) {
-        log.debug("http post /api/v2/courses/add");
+        log.debug("http post /api/v2/courses");
         CourseSummaryResponse c = courseCommandService.addCourse(courseRequest);
-        return ResponseEntity.status(HttpStatus.OK).body(c);
+        return ResponseEntity.status(HttpStatus.CREATED).body(c);
     }
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<CourseSummaryResponse> deleteCourse(@PathVariable Long id) {
-        log.debug("http post /api/v2/courses/delete/{id}");
+        log.debug("http delete /api/v2/courses/{}", id);
         CourseSummaryResponse c=courseCommandService.deleteCourse(id);
         return ResponseEntity.status(HttpStatus.OK).body(c);
 
     }
-    @PatchMapping("/patch/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<CourseSummaryResponse> patchCourse(@PathVariable Long id, @RequestBody CoursePatchRequest coursePatchRequest) {
-        log.debug("http patch /api/v2/course/patch/{}", id);
+        log.debug("http patch /api/v2/courses/{}", id);
         CourseSummaryResponse c = courseCommandService.updatePatchCourse(id, coursePatchRequest);
         return ResponseEntity.status(HttpStatus.OK).body(c);
     }
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<CourseSummaryResponse> updateCourse(@PathVariable Long id, @Valid @RequestBody CourseRequest courseRequest) {
-        log.debug("http put /api/v2/course/update/{}", id);
+        log.debug("http put /api/v2/courses/{}", id);
         CourseSummaryResponse c = courseCommandService.updateCourse(id, courseRequest);
         return ResponseEntity.status(HttpStatus.OK).body(c);
     }
-    @GetMapping("/all")
+    @GetMapping("")
     public ResponseEntity<List<CourseSummaryResponse>> getAllCourses() {
-        log.debug("http get /api/v2/course/all");
+        log.debug("http get /api/v2/courses");
         List<CourseSummaryResponse> courses = courseQueryService.getAllCourses();
         return ResponseEntity.status(HttpStatus.OK).body(courses);
     }
-    @GetMapping("/name/{name}")
+    @GetMapping("/by-name/{name}")
     public ResponseEntity<CourseSummaryResponse> getCourseByName(@PathVariable String name) {
-        log.debug("http get /api/v2/course/name/{}", name);
+        log.debug("http get /api/v2/courses/by-name/{}", name);
         CourseSummaryResponse course = courseQueryService.getCourseByName(name);
         return ResponseEntity.status(HttpStatus.OK).body(course);
     }
     @GetMapping("/{id}")
     public ResponseEntity<CourseSummaryResponse> getCourseById(@PathVariable Long id) {
-        log.debug("http get /api/v2/course/{}", id);
+        log.debug("http get /api/v2/courses/{}", id);
         CourseSummaryResponse r=courseQueryService.getCourseById(id);
         return ResponseEntity.status(HttpStatus.OK).body(r);
 
