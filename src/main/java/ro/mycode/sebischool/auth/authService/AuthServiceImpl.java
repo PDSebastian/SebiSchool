@@ -4,19 +4,16 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import ro.mycode.sebischool.student.dtos.StudentDetailResponse;
-import ro.mycode.sebischool.student.dtos.StudentRequest;
-import ro.mycode.sebischool.auth.dtos.AuthLoginRequest;
-import ro.mycode.sebischool.auth.dtos.AuthLoginResponse;
+import ro.mycode.sebischool.auth.dtos.UserLoginrequest;
 import ro.mycode.sebischool.users.dtos.UserRequest;
 import ro.mycode.sebischool.users.dtos.UserResponse;
 import ro.mycode.sebischool.users.exceptions.UserAlreadyExistsException;
 import ro.mycode.sebischool.users.exceptions.UserNotFoundException;
-import ro.mycode.sebischool.users.jwt.JWTTokenProvider;
+import ro.mycode.sebischool.system.jwt.JWTTokenProvider;
 import ro.mycode.sebischool.users.mapper.UserMapper;
 import ro.mycode.sebischool.users.model.User;
 import ro.mycode.sebischool.users.repository.Userrepository;
-import ro.mycode.sebischool.users.security.UserPermissions;
+import ro.mycode.sebischool.system.security.UserPermissions;
 
 import java.util.Set;
 
@@ -41,35 +38,32 @@ public class AuthServiceImpl implements AuthService {
 
 
     @Override
-    public AuthLoginResponse login(UserRequest request) {
+    public UserResponse login(UserLoginrequest userLoginrequest) {
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.email(), request.password())
+                new UsernamePasswordAuthenticationToken(userLoginrequest.email(), userLoginrequest.password())
         );
 
-        User user = userRepository.findByEmail(request.email())
+        User user = userRepository.findByEmail(userLoginrequest.email())
                 .orElseThrow(() -> new UserNotFoundException());
 
-        return new AuthLoginResponse(
+        return new UserResponse(
                 user.getId(),
                 user.getFirstName(),
                 user.getLastName(),
                 user.getEmail(),
-                user.getPermissions(),
                 jwtTokenProvider.generateToken(user)
         );
     }
 
     @Override
     public UserResponse register(UserRequest request) {
-        if(userRepository.findByEmail(request.email()).isPresent()){
+        if(userRepository.findByEmail(request.email()).isPresent()) {
             throw new UserAlreadyExistsException();
         }
-
         User user = userMapper.toEntity(request);
-
         user.setPassword(passwordEncoder.encode(request.password()));
-
-        user.setPermissions(Set.of(UserPermissions.USER_ADD, UserPermissions.USER_DELELTE, UserPermissions.USER_EDIT));
-        return UserMapper.toDTO(userRepository.save(user));
+        user.setPermissions(Set.of(UserPermissions.USER_ADD, UserPermissions.USER_DELETE));
+        User saved=userRepository.save(user);
+        return UserMapper.toDTO(saved,jwtTokenProvider.generateToken(user));
     }
 }

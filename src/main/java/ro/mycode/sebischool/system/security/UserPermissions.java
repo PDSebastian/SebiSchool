@@ -1,10 +1,14 @@
-package ro.mycode.sebischool.users.security;
+package ro.mycode.sebischool.system.security;
 
 import lombok.AllArgsConstructor;
 
 
 @AllArgsConstructor
 public enum UserPermissions {
+
+    USER_ADD("User_Add"),
+    USER_EDIT("User_Edit"),
+    USER_DELETE("User_Delete"),
 
 
     COURSE_READ("COURSE_READ"),

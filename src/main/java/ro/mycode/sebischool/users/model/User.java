@@ -5,7 +5,7 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import ro.mycode.sebischool.users.security.UserPermissions;
+import ro.mycode.sebischool.system.security.UserPermissions;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -68,19 +68,19 @@ public class User implements UserDetails {
     }
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
 }

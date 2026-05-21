@@ -1,4 +1,4 @@
-package ro.mycode.sebischool.users.security;
+package ro.mycode.sebischool.system.security;
 
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,7 +27,7 @@ import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
 
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
-import static ro.mycode.sebischool.users.security.SecurityConstants.AUTHORITIES;
+import static ro.mycode.sebischool.system.security.SecurityConstants.AUTHORITIES;
 
 @Configuration
 @EnableWebSecurity
@@ -95,12 +95,12 @@ public class SecurityConfiguration {
     @Bean
     public JwtAuthenticationConverter jwtAuthenticationConverter() {
         JwtGrantedAuthoritiesConverter grantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
-        grantedAuthoritiesConverter.setAuthoritiesClaimName(AUTHORITIES);
+        grantedAuthoritiesConverter.setAuthoritiesClaimName(SecurityConstants.AUTHORITIES);
         grantedAuthoritiesConverter.setAuthorityPrefix("");
 
-        JwtAuthenticationConverter authenticationConverter = new JwtAuthenticationConverter();
-        authenticationConverter.setJwtGrantedAuthoritiesConverter(grantedAuthoritiesConverter);
-        return authenticationConverter;
+        JwtAuthenticationConverter converter = new JwtAuthenticationConverter();
+        converter.setJwtGrantedAuthoritiesConverter(grantedAuthoritiesConverter);
+        return converter;
     }
 
 }

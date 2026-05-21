@@ -18,7 +18,7 @@ public class UserMapper {
                 .build();
 
     }
-    public static UserResponse toDTO(User user) {
+    public static UserResponse toDTO(User user,String token) {
         if (user == null) {
             return null;
         }
@@ -26,7 +26,11 @@ public class UserMapper {
                 user.getId(),
                 user.getFirstName(),
                 user.getEmail(),
-                user.getLastName()
+                user.getLastName(),
+                token
+
+
+
         );
     }
 }

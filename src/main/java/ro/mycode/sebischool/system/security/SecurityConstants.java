@@ -1,4 +1,4 @@
-package ro.mycode.sebischool.users.security;
+package ro.mycode.sebischool.system.security;
 
 import lombok.NoArgsConstructor;
 

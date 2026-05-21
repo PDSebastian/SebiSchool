@@ -1,4 +1,4 @@
-package ro.mycode.sebischool.users.jwt;
+package ro.mycode.sebischool.system.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.util.Arrays.stream;
-import static ro.mycode.sebischool.users.security.SecurityConstants.*;
+import static ro.mycode.sebischool.system.security.SecurityConstants.*;
 
 @Component
 public class JWTTokenProvider {
