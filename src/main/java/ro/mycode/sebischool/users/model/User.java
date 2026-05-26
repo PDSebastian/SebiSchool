@@ -5,6 +5,7 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import ro.mycode.sebischool.student.model.Student;
 import ro.mycode.sebischool.system.security.UserPermissions;
 
 import java.util.Collection;
@@ -61,6 +62,7 @@ public class User implements UserDetails {
                 .map(SimpleGrantedAuthority::new)
                 .toList();
     }
+
 
     @Override
     public String getUsername() {

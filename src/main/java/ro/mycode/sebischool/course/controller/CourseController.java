@@ -1,9 +1,11 @@
 package ro.mycode.sebischool.course.controller;
 
+import jakarta.annotation.PreDestroy;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ro.mycode.sebischool.course.service.commandService.CourseCommandService;
 import ro.mycode.sebischool.course.dtos.CoursePatchRequest;
@@ -25,12 +27,14 @@ public class    CourseController {
 
     }
     @PostMapping("/add")
+    @PreAuthorize("hasAuthority('course:add')")
     public ResponseEntity<CourseSummaryResponse> addCourse(@Valid @RequestBody CourseRequest courseRequest) {
         log.debug("http post /api/v2/courses/add");
         CourseSummaryResponse c = courseCommandService.addCourse(courseRequest);
         return ResponseEntity.status(HttpStatus.OK).body(c);
     }
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasAuthority('course:delete')")
     public ResponseEntity<CourseSummaryResponse> deleteCourse(@PathVariable Long id) {
         log.debug("http post /api/v2/courses/delete/{id}");
         CourseSummaryResponse c=courseCommandService.deleteCourse(id);
@@ -44,6 +48,7 @@ public class    CourseController {
         return ResponseEntity.status(HttpStatus.OK).body(c);
     }
     @PutMapping("/update/{id}")
+    @PreAuthorize("hasAuthority('course:edit')")
     public ResponseEntity<CourseSummaryResponse> updateCourse(@PathVariable Long id, @Valid @RequestBody CourseRequest courseRequest) {
         log.debug("http put /api/v2/course/update/{}", id);
         CourseSummaryResponse c = courseCommandService.updateCourse(id, courseRequest);
