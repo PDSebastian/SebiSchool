@@ -34,26 +34,27 @@ public class StudentQueryServiceImpl implements StudentQueryService{
 
     @Override
     public List<StudentSummaryResponse> getStudentByEmail(String email) {
-//        return studentRepository.findByEmail(email).map(student -> studentMapper.toDto(student));
-        return null;
+        return studentRepository.findByUserEmail(email)
+                .map(StudentMapper::StudentToStudentSummaryResponse)
+                .map(List::of)
+                .orElseGet(List::of);
     }
 
     @Override
     public Optional<StudentSummaryResponse> getStudentByFirstNameAndLastName(String firstName, String lastName) {
-//        return studentRepository.findByFirstNameAndLastName(firstName,lastName).map(student -> studentMapper.toDto(student));
-        return null;
+        // FirstName + LastName traiesc pe User. Daca e nevoie, adauga findByUserFirstNameAndUserLastName in StudentRepository.
+        return Optional.empty();
     }
 
     @Override
     public StudentDetailResponse getStudentById(Long studentID) {
-        Student s=studentRepository.findById(studentID).orElseThrow(()->new StudentNotFoundException());
-        return  StudentMapper.StudentToStudentDetailResponse(s);
-
+        Student s = studentRepository.findById(studentID).orElseThrow(StudentNotFoundException::new);
+        return StudentMapper.StudentToStudentDetailResponse(s);
     }
 
     @Override
     public List<StudentSummaryResponse> getStudentsByFirstName(String firstName) {
-        return studentRepository.findStudentByFirstName(firstName)
+        return studentRepository.findByUserFirstName(firstName)
                 .stream()
                 .map(StudentMapper::StudentToStudentSummaryResponse)
                 .toList();

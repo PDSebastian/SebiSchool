@@ -4,10 +4,11 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import ro.mycode.sebischool.users.model.UserType;
 
 public record AuthRegisterRequest(
         @NotNull
-        Long studentId,
+        UserType userType,
 
         @NotBlank
         String firstName,
@@ -21,6 +22,9 @@ public record AuthRegisterRequest(
 
         @NotBlank
         @Size(min = 3, max = 50, message = "size 3-50")
-        String password
+        String password,
+
+        // Obligatoriu DOAR cand userType == STUDENT. Validarea o face serviciul.
+        Integer age
 ) {
 }

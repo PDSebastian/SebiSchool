@@ -32,6 +32,10 @@ public class User implements UserDetails {
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     private Student student;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private UserType userType;
+
 
     @Override
     public boolean equals(Object o) {
@@ -55,7 +59,10 @@ public class User implements UserDetails {
                 ", password='" + password + '\'' +
                 '}';
     }
+    @ElementCollection(targetClass = UserPermissions.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_permissions", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
+    @Column(name = "permission")
     private Set<UserPermissions> permissions = new HashSet<>();
 
     @Override

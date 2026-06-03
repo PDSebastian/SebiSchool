@@ -20,6 +20,8 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
+import org.springframework.security.oauth2.server.resource.web.BearerTokenResolver;
+import org.springframework.security.oauth2.server.resource.web.DefaultBearerTokenResolver;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -75,9 +77,29 @@ public class SecurityConfiguration {
                 .exceptionHandling(exception -> exception
                         .authenticationEntryPoint((AuthenticationEntryPoint) jwtAuthenticationEntryPoint)
                         .accessDeniedHandler(securityAccessDeniedHandler))
-                .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())));
+                .oauth2ResourceServer(oauth2 -> oauth2
+                        .bearerTokenResolver(publicAwareBearerTokenResolver())
+                        .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())));
 
         return http.build();
+    }
+
+    // Ignora Authorization: Bearer pe rutele publice (login/register).
+    // Fara asta, un token expirat sau prost trimis catre /register declanseaza 401
+    // chiar daca ruta e permitAll, pentru ca filtrul OAuth2 valideaza header-ul
+    // INAINTE ca regula permitAll sa fie verificata.
+    @Bean
+    public BearerTokenResolver publicAwareBearerTokenResolver() {
+        DefaultBearerTokenResolver defaultResolver = new DefaultBearerTokenResolver();
+        return request -> {
+            String uri = request.getRequestURI();
+            for (String publicUrl : SecurityConstants.PUBLIC_URLS) {
+                if (publicUrl.equals(uri)) {
+                    return null;
+                }
+            }
+            return defaultResolver.resolve(request);
+        };
     }
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
