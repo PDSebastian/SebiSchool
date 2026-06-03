@@ -20,6 +20,7 @@ public interface CourseRepository extends JpaRepository<Course,Long> {
 
 
     Optional<Course> findByName(String name);
-    List<Course> findAllByEnrolmentsStudentEmail(String email);
+    // Trecut prin user dupa ce email/firstName/lastName s-au mutat de pe Student pe User.
+    List<Course> findAllByEnrolmentsStudentUserEmail(String email);
     List<Course> id(Long id);
 }
