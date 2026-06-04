@@ -1,4 +1,4 @@
-package ro.mycode.sebischool.enrolment.service.commanService;
+package ro.mycode.sebischool.enrolment.service.commandService;
 
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -70,12 +70,12 @@ public class EnrolmentCommandServiceImpl implements EnrolmentCommandService {
 
    @Override
    @Transactional
-    public EnrolmentResponse deleteEnrolment(Long id) {
+    public void deleteEnrolment(Long id) {
        if(!enrolmentRepository.existsById(id)){
            throw new EnrolmentNotFoundException();
        }
       enrolmentRepository.deleteById(id);
-       return null;
+
    }
 
     @Override

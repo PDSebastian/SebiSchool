@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ro.mycode.sebischool.enrolment.dtos.EnrolmentResponse;
 import ro.mycode.sebischool.student.dtos.*;
@@ -24,12 +25,14 @@ public class StudentController {
         this.studentQueryService = studentQueryService;
     }
     @PostMapping("/add")
+    @PreAuthorize("hasAuthority('USER_ADD')")
     public ResponseEntity<StudentSummaryResponse> addStudent(@Valid @RequestBody StudentRequest studentRequest) {
         log.debug("http post /api/v2/students");
         StudentSummaryResponse s = studentCommandService.addStudent(studentRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(s);
     }
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('USER_DELETE')")
     public ResponseEntity<Void> deleteStudent(@PathVariable Long id) {
         log.debug("http delete /api/v2/students/{}", id);
         studentCommandService.deleteStudent(id);
@@ -42,6 +45,7 @@ public class StudentController {
         return ResponseEntity.status(HttpStatus.OK).body(s);
     }
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('USER_EDIT')")
     public ResponseEntity<StudentSummaryResponse> updateStudent(@PathVariable Long id, @Valid @RequestBody StudentRequest studentRequest) {
         log.debug("http put /api/v2/students/{}", id);
         StudentSummaryResponse s = studentCommandService.updateStudent(id, studentRequest);

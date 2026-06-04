@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import ro.mycode.sebischool.enrolment.service.commanService.EnrolmentCommandService;
+import ro.mycode.sebischool.enrolment.service.commandService.EnrolmentCommandService;
 import ro.mycode.sebischool.enrolment.dtos.EnrolmentPatchRequest;
 import ro.mycode.sebischool.enrolment.dtos.EnrolmentRequest;
 import ro.mycode.sebischool.enrolment.dtos.EnrolmentResponse;
