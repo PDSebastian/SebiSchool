@@ -115,11 +115,9 @@ public class AuthServiceImpl implements AuthService {
                     UserPermissions.COURSE_MANAGE,
                     UserPermissions.USER_ADD,
                     UserPermissions.USER_EDIT,
-                    UserPermissions.USER_DELELTE
+                    UserPermissions.USER_DELETE
             );
         }
-        // STUDENT (default): poate vedea cursurile si se poate inscrie singur;
-        // poate edita doar propriul profil.
         return Set.of(
                 UserPermissions.COURSE_VIEW,
                 UserPermissions.ENROL_SELF,

@@ -37,47 +37,40 @@ public class GlobalExceptionsHandler {
             EnrolmentNotFoundException.class,
             CourseNotFoundException.class,
             UserNotFoundException.class
-
     })
-    public ResponseEntity<ApiErrorResponse> handleBadRequest(RuntimeException e) {
-            ApiErrorResponse apiErrorResponse=ApiErrorResponse.builder()
-                    .message(e.getMessage())
-                    .status(HttpStatus.BAD_REQUEST.value())
-                    .build();
-
-            return  ResponseEntity.status(HttpStatus.CONFLICT).body(apiErrorResponse);
-
+    public ResponseEntity<ApiErrorResponse> handleNotFound(RuntimeException e) {
+        ApiErrorResponse apiErrorResponse = ApiErrorResponse.builder()
+                .message(e.getMessage())
+                .status(HttpStatus.NOT_FOUND.value())
+                .build();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiErrorResponse);
     }
+
     @ExceptionHandler({
             StudentAlreadyExistsException.class,
             CourseAlreadyExistsException.class,
             EnrolmentAlreadyExistsException.class,
             BookAlreadyExistsException.class,
             EmailAlreadyExistsException.class,
-            UserAlreadyExistsException.class,
-
-
+            UserAlreadyExistsException.class
     })
     public ResponseEntity<ApiErrorResponse> handleConflict(RuntimeException e) {
-        ApiErrorResponse apiErrorResponse=ApiErrorResponse.builder()
+        ApiErrorResponse apiErrorResponse = ApiErrorResponse.builder()
                 .message(e.getMessage())
-                .status(HttpStatus.BAD_REQUEST.value())
+                .status(HttpStatus.CONFLICT.value())
                 .build();
-        return  ResponseEntity.status(HttpStatus.CONFLICT).body(apiErrorResponse);
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(apiErrorResponse);
     }
+
     @ExceptionHandler({
             InvalidStudentAgeException.class,
             CourseFullException.class
-
-
     })
-    public ResponseEntity<ApiErrorResponse> handleInvalidStudentAge(RuntimeException e) {
-        ApiErrorResponse apiErrorResponse=ApiErrorResponse.builder()
+    public ResponseEntity<ApiErrorResponse> handleBadRequest(RuntimeException e) {
+        ApiErrorResponse apiErrorResponse = ApiErrorResponse.builder()
                 .message(e.getMessage())
                 .status(HttpStatus.BAD_REQUEST.value())
                 .build();
-        return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiErrorResponse);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiErrorResponse);
     }
-
-
 }

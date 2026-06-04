@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ro.mycode.sebischool.enrolment.service.commanService.EnrolmentCommandService;
 import ro.mycode.sebischool.enrolment.dtos.EnrolmentPatchRequest;
@@ -25,17 +26,19 @@ public class EnrolmentController {
         this.enrolmentQueryService = enrolmentQueryService;
 
     }
-    @PostMapping("")
+    @PostMapping("/add")
+    @PreAuthorize("hasAuthority('ENROL_SELF')")
     public ResponseEntity<EnrolmentResponse> addEnrolment(@Valid @RequestBody EnrolmentRequest enrolmentRequest) {
         log.debug("http post /api/v2/enrolments");
         EnrolmentResponse response = enrolmentCommandService.addEnrolment(enrolmentRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<EnrolmentResponse> deleteEnrolment(@PathVariable Long id) {
+    @PreAuthorize("hasAuthority('USER_DELETE')")
+    public ResponseEntity<Void> deleteEnrolment(@PathVariable Long id) {
         log.debug("http delete /api/v2/enrolments/{}", id);
-        EnrolmentResponse response = enrolmentCommandService.deleteEnrolment(id);
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+       enrolmentCommandService.deleteEnrolment(id);
+        return ResponseEntity.noContent().build();
     }
     @PatchMapping("/{id}")
     public ResponseEntity<EnrolmentResponse> patchEnrolment(@PathVariable Long id, @RequestBody EnrolmentPatchRequest request) {

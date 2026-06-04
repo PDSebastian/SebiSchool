@@ -23,7 +23,7 @@ public class StudentController {
         this.studentCommandService = studentCommandService;
         this.studentQueryService = studentQueryService;
     }
-    @PostMapping("")
+    @PostMapping("/add")
     public ResponseEntity<StudentSummaryResponse> addStudent(@Valid @RequestBody StudentRequest studentRequest) {
         log.debug("http post /api/v2/students");
         StudentSummaryResponse s = studentCommandService.addStudent(studentRequest);
