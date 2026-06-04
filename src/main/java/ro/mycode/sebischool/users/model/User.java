@@ -2,9 +2,11 @@ package ro.mycode.sebischool.users.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import ro.mycode.sebischool.professor.model.Professor;
 import ro.mycode.sebischool.student.model.Student;
 import ro.mycode.sebischool.users.security.UserPermissions;
 
@@ -31,6 +33,9 @@ public class User implements UserDetails {
 
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     private Student student;
+
+    @OneToOne(mappedBy = "user",fetch = FetchType.LAZY)
+    private Professor professor;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

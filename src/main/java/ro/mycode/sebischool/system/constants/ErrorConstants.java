@@ -18,5 +18,8 @@ public class ErrorConstants {
     public static final String EMAIL_ALREADY_EXISTS_ERROR = "Email Already Exists";
     public static final String USER_NOT_FOUND_ERROR = "User does not exist";
     public static final String USER_ALREADY_EXISTS_ERROR = "User Already Exists";
+    public static final String PROFESSOR_ALREADY_EXISTS_ERROR = "Professor Already Exists";
+    public static final String PROFESSOR_NOT_FOUND_ERROR = "Professor does not exist";
+
 
 }

@@ -11,6 +11,8 @@ import ro.mycode.sebischool.course.exceptions.CourseFullException;
 import ro.mycode.sebischool.course.exceptions.CourseNotFoundException;
 import ro.mycode.sebischool.enrolment.exceptions.EnrolmentAlreadyExistsException;
 import ro.mycode.sebischool.enrolment.exceptions.EnrolmentNotFoundException;
+import ro.mycode.sebischool.professor.exceptions.ProfessorAlreadyExistsException;
+import ro.mycode.sebischool.professor.exceptions.ProfessorNotFoundException;
 import ro.mycode.sebischool.student.exceptions.EmailAlreadyExistsException;
 import ro.mycode.sebischool.student.exceptions.InvalidStudentAgeException;
 import ro.mycode.sebischool.student.exceptions.StudentAlreadyExistsException;
@@ -36,7 +38,8 @@ public class GlobalExceptionsHandler {
             BookNotFoundException.class,
             EnrolmentNotFoundException.class,
             CourseNotFoundException.class,
-            UserNotFoundException.class
+            UserNotFoundException.class,
+            ProfessorNotFoundException.class
     })
     public ResponseEntity<ApiErrorResponse> handleNotFound(RuntimeException e) {
         ApiErrorResponse apiErrorResponse = ApiErrorResponse.builder()
@@ -52,7 +55,8 @@ public class GlobalExceptionsHandler {
             EnrolmentAlreadyExistsException.class,
             BookAlreadyExistsException.class,
             EmailAlreadyExistsException.class,
-            UserAlreadyExistsException.class
+            UserAlreadyExistsException.class,
+            ProfessorAlreadyExistsException.class
     })
     public ResponseEntity<ApiErrorResponse> handleConflict(RuntimeException e) {
         ApiErrorResponse apiErrorResponse = ApiErrorResponse.builder()
