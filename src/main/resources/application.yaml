@@ -24,4 +24,6 @@ application:
   jwt:
     tokenPrefix: "Bearer"
     tokenExpirationAfterDays: 7
+    # JWT_SECRET_KEY trebuie obligatoriu setat in prod (env var).
+    # Default-ul de mai jos e DOAR pentru dev local.
     secretKey: ${JWT_SECRET_KEY:asdasdasdasdasd123344asdasdasdasdasasd12321332sadasXYZ0123456789ABCDEF}
