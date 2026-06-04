@@ -36,8 +36,9 @@ public class StudentCommandServiceImpl implements StudentCommandService {
     public StudentSummaryResponse updateStudent(Long id, StudentRequest studentRequest) {
         Student s = studentRepository.findById(id)
                 .orElseThrow(StudentNotFoundException::new);
-        if (studentRequest.getAge() > 100) {
+        if (studentRequest.getAge() < 0 || studentRequest.getAge() > 100){
             throw new InvalidStudentAgeException();
+
         }
 
         User u = s.getUser();

@@ -62,7 +62,6 @@ public class BookCommandServiceImpl implements BookCommandService {
         Book b=bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException());
         b.setBookName(bookPatchRequest.getBookName());
         b.setCreatedAt(bookPatchRequest.getCreatedAt());
-        bookRepository.save(b);
         return BookMapper.toDto(bookRepository.save(b));
     }
 }

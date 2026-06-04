@@ -14,8 +14,8 @@ import ro.mycode.sebischool.enrolment.dtos.EnrolmentResponse;
 import ro.mycode.sebischool.enrolment.exceptions.EnrolmentNotFoundException;
 import ro.mycode.sebischool.enrolment.model.Enrolment;
 import ro.mycode.sebischool.enrolment.repository.EnrolmentRepository;
-import ro.mycode.sebischool.enrolment.service.commanService.EnrolmentCommandServiceImpl;
-import ro.mycode.sebischool.enrolment.service.commanService.EnrolmentCommandService;
+import ro.mycode.sebischool.enrolment.service.commandService.EnrolmentCommandServiceImpl;
+import ro.mycode.sebischool.enrolment.service.commandService.EnrolmentCommandService;
 import ro.mycode.sebischool.student.model.Student;
 import ro.mycode.sebischool.student.repository.StudentRepository;
 

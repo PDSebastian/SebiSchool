@@ -10,13 +10,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import ro.mycode.sebischool.enrolment.controller.EnrolmentController;
 import ro.mycode.sebischool.enrolment.dtos.EnrolmentRequest;
 import ro.mycode.sebischool.enrolment.dtos.EnrolmentResponse;
-import ro.mycode.sebischool.enrolment.service.commanService.EnrolmentCommandService;
+import ro.mycode.sebischool.enrolment.service.commandService.EnrolmentCommandService;
 import ro.mycode.sebischool.enrolment.service.queryService.EnrolmentQueryService;
 import ro.mycode.sebischool.student.dtos.StudentSummaryResponse;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;

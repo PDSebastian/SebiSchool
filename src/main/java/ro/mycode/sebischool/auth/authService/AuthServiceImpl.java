@@ -17,21 +17,21 @@ import ro.mycode.sebischool.users.exceptions.UserNotFoundException;
 import ro.mycode.sebischool.users.jwt.JWTTokenProvider;
 import ro.mycode.sebischool.users.model.User;
 import ro.mycode.sebischool.users.model.UserType;
-import ro.mycode.sebischool.users.repository.Userrepository;
+import ro.mycode.sebischool.users.repository.UserRepository;
 import ro.mycode.sebischool.users.security.UserPermissions;
 
 import java.util.Set;
 
 @Component
 public class AuthServiceImpl implements AuthService {
-    private final Userrepository userRepository;
+    private final UserRepository userRepository;
     private final StudentRepository studentRepository;
     private final AuthenticationManager authenticationManager;
     private final JWTTokenProvider jwtTokenProvider;
     private final PasswordEncoder passwordEncoder;
 
 
-    public  AuthServiceImpl(Userrepository userRepository,
+    public  AuthServiceImpl(UserRepository userRepository,
                             StudentRepository studentRepository,
                             AuthenticationManager authenticationManager,
                             JWTTokenProvider jwtTokenProvider,
@@ -115,11 +115,9 @@ public class AuthServiceImpl implements AuthService {
                     UserPermissions.COURSE_MANAGE,
                     UserPermissions.USER_ADD,
                     UserPermissions.USER_EDIT,
-                    UserPermissions.USER_DELELTE
+                    UserPermissions.USER_DELETE
             );
         }
-        // STUDENT (default): poate vedea cursurile si se poate inscrie singur;
-        // poate edita doar propriul profil.
         return Set.of(
                 UserPermissions.COURSE_VIEW,
                 UserPermissions.ENROL_SELF,

@@ -4,13 +4,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-import ro.mycode.sebischool.users.exceptions.UserNotFoundException;
-import ro.mycode.sebischool.users.repository.Userrepository;
+import ro.mycode.sebischool.users.repository.UserRepository;
 @Component
 public class UserDetailServiceImpl implements UserDetailsService {
 
-  private  Userrepository  userrepository;
-    public UserDetailServiceImpl(Userrepository userrepository) {
+  private UserRepository userrepository;
+    public UserDetailServiceImpl(UserRepository userrepository) {
         this.userrepository = userrepository;
     }
 

@@ -1,4 +1,4 @@
-package ro.mycode.sebischool.enrolment.service.commanService;
+package ro.mycode.sebischool.enrolment.service.commandService;
 
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,20 +55,27 @@ public class EnrolmentCommandServiceImpl implements EnrolmentCommandService {
     @Override
     @Transactional
     public EnrolmentResponse updateEnrolment(Long id, EnrolmentRequest enrolmentRequest) {
-        Enrolment e = enrolmentRepository.findById(id)
+        Enrolment enrolment = enrolmentRepository.findById(id)
                 .orElseThrow(() -> new EnrolmentNotFoundException());
-        return EnrolmentMapper.toDto(enrolmentRepository.save(e));
+
+        Student student = studentRepository.findById(enrolmentRequest.getStudentId())
+                .orElseThrow(() -> new StudentNotFoundException());
+        Course course = courseRepository.findById(enrolmentRequest.getCourseId())
+                .orElseThrow(() -> new CourseNotFoundException());
+        enrolment.setStudent(student);
+        enrolment.setCourse(course);
+        return EnrolmentMapper.toDto(enrolmentRepository.save(enrolment));
     }
 
 
    @Override
    @Transactional
-    public EnrolmentResponse deleteEnrolment(Long id) {
+    public void deleteEnrolment(Long id) {
        if(!enrolmentRepository.existsById(id)){
            throw new EnrolmentNotFoundException();
        }
       enrolmentRepository.deleteById(id);
-       return null;
+
    }
 
     @Override
