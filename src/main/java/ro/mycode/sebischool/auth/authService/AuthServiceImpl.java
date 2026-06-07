@@ -83,8 +83,6 @@ public class AuthServiceImpl implements AuthService {
         user.setPermissions(permissionsForType(request.userType()));
         User savedUser = userRepository.save(user);
 
-        // Pentru STUDENT cream si entitatea Student in aceeasi tranzactie.
-        // PROFESOR nu are (inca) entitate dedicata; userul e suficient.
         if (request.userType() == UserType.STUDENT) {
             createStudentForUser(savedUser, request);
         }
@@ -109,19 +107,19 @@ public class AuthServiceImpl implements AuthService {
     }
 
     private Set<UserPermissions> permissionsForType(UserType type) {
-        if (type == UserType.PROFESOR) {
+        if (type == UserType.PROFESSOR) {
             return Set.of(
-                    UserPermissions.COURSE_VIEW,
-                    UserPermissions.COURSE_MANAGE,
-                    UserPermissions.USER_ADD,
+                    UserPermissions.USER_VIEW,
                     UserPermissions.USER_EDIT,
-                    UserPermissions.USER_DELETE
+                    UserPermissions.COURSE_VIEW,
+                    UserPermissions.COURSE_MANAGE
             );
         }
         return Set.of(
+                UserPermissions.USER_VIEW,
+                UserPermissions.USER_EDIT,
                 UserPermissions.COURSE_VIEW,
-                UserPermissions.ENROL_SELF,
-                UserPermissions.USER_EDIT
+                UserPermissions.ENROL_SELF
         );
     }
 }

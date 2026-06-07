@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import ro.mycode.sebischool.enrolment.model.Enrolment;
+import ro.mycode.sebischool.professor.model.Professor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,10 @@ public class Course {
 
     @NotBlank(message = "Departamentul este obligatoriu")
     private String departament;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "professor_id")
+    private Professor professor;
 
 
     @Override

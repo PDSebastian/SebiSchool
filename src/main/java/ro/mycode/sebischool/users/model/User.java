@@ -21,10 +21,11 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 @Entity
+@Table(name="user")
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String   firstName;
     String  lastName;

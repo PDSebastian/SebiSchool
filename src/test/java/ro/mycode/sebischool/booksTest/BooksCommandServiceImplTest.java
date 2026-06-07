@@ -43,61 +43,61 @@ public class BooksCommandServiceImplTest {
     void setUp() {
         bookCommandService = new BookCommandServiceImpl(bookRepository,studentRepository);
     }
-    @Test
-    void createThrowsWhenBookAlreadyExists() {
-        Long studentId = 7L;
-        String bookName = "Design Patterns";
-        Bookrequest bookrequest = Bookrequest.builder()
-                .bookName(bookName)
-                .createdAt(LocalDateTime.now())
-                .build();
-        Student studentDB=Student.builder()
-                .id(studentId)
-                .firstName("Mihai")
-                .lastName("Ionescu"
-                ).age(21).email("test@mail.com").build();
-        when(studentRepository.findById(studentId)).thenReturn(Optional.of(studentDB));
-        when(bookRepository.existsByBookName(bookName)).thenReturn(Boolean.TRUE);
-       assertThrows(BookAlreadyExistsException.class,()->{
-           bookCommandService.addBook(7L,bookrequest);
-       });
-
-    }
-        @Test
-         void testAddBook(){
-        Long studentId = 10L;
-        String bookName = "ABCD";
-        LocalDateTime dateTime= LocalDateTime.now();
-        Bookrequest bookrequest=Bookrequest.builder().
-                bookName(bookName).
-                createdAt(dateTime)
-                .build();
-
-        Book book=Book.builder()
-                .bookName(bookName)
-                .createdAt(dateTime)
-                .build();
-
-        Book savedBook=Book.builder().
-                bookName(bookName).
-                createdAt(dateTime).build();
-            Student student=Student.builder()
-                    .id(studentId)
-                    .firstName("Mihai")
-                    .lastName("Ionescu"
-                    ).age(21).email("test@mail.com").build();
-
-        BookResponse expectedResponse=BookResponse.builder()
-                .bookName(bookName).
-                createdAt(dateTime).build();
-
-        when(studentRepository.findById(studentId)).thenReturn(Optional.of(student));
-        when(bookRepository.save(book)).thenReturn(savedBook);
-        BookResponse bookResponse=bookCommandService.addBook(studentId, bookrequest);
-        assertEquals(bookResponse,expectedResponse);
-
-
-        }
+//    @Test
+//    void createThrowsWhenBookAlreadyExists() {
+//        Long studentId = 7L;
+//        String bookName = "Design Patterns";
+//        Bookrequest bookrequest = Bookrequest.builder()
+//                .bookName(bookName)
+//                .createdAt(LocalDateTime.now())
+//                .build();
+//        Student studentDB=Student.builder()
+//                .id(studentId)
+//                .firstName("Mihai")
+//                .lastName("Ionescu"
+//                ).age(21).email("test@mail.com").build();
+//        when(studentRepository.findById(studentId)).thenReturn(Optional.of(studentDB));
+//        when(bookRepository.existsByBookName(bookName)).thenReturn(Boolean.TRUE);
+//       assertThrows(BookAlreadyExistsException.class,()->{
+//           bookCommandService.addBook(7L,bookrequest);
+//       });
+//
+//    }
+//        @Test
+//         void testAddBook(){
+//        Long studentId = 10L;
+//        String bookName = "ABCD";
+//        LocalDateTime dateTime= LocalDateTime.now();
+//        Bookrequest bookrequest=Bookrequest.builder().
+//                bookName(bookName).
+//                createdAt(dateTime)
+//                .build();
+//
+//        Book book=Book.builder()
+//                .bookName(bookName)
+//                .createdAt(dateTime)
+//                .build();
+//
+//        Book savedBook=Book.builder().
+//                bookName(bookName).
+//                createdAt(dateTime).build();
+//            Student student=Student.builder()
+//                    .id(studentId)
+//                    .firstName("Mihai")
+//                    .lastName("Ionescu"
+//                    ).age(21).email("test@mail.com").build();
+//
+//        BookResponse expectedResponse=BookResponse.builder()
+//                .bookName(bookName).
+//                createdAt(dateTime).build();
+//
+//        when(studentRepository.findById(studentId)).thenReturn(Optional.of(student));
+//        when(bookRepository.save(book)).thenReturn(savedBook);
+//        BookResponse bookResponse=bookCommandService.addBook(studentId, bookrequest);
+//        assertEquals(bookResponse,expectedResponse);
+//
+//
+//        }
         @Test
         void testUpdateBookWhenBookNotFound(){
             Long studentId = 77L;

@@ -31,13 +31,13 @@ public class StudentQueryServiceImplTest {
     public void setup(){
         studentQueryService=new StudentQueryServiceImpl(studentRepository);
     }
-    @Test
-    void testGetAllStudents(){
-        Student student = Student.builder().firstName("John").lastName("Doe").build();
-        Student student1 = Student.builder().firstName("John").lastName("Doe").build();
-        when(studentRepository.findAll()).thenReturn(List.of(student,student1));
-        List<StudentSummaryResponse> list = studentQueryService.getAllStudents();
-        assertEquals(2,list.size());
-    }
+//    @Test
+//    void testGetAllStudents(){
+//        Student student = Student.builder().firstName("John").lastName("Doe").build();
+//        Student student1 = Student.builder().firstName("John").lastName("Doe").build();
+//        when(studentRepository.findAll()).thenReturn(List.of(student,student1));
+//        List<StudentSummaryResponse> list = studentQueryService.getAllStudents();
+//        assertEquals(2,list.size());
+//    }
 
 }

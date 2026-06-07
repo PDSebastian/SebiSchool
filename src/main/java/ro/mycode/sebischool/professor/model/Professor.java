@@ -5,9 +5,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+import ro.mycode.sebischool.course.model.Course;
 import ro.mycode.sebischool.users.model.User;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -18,27 +21,29 @@ import java.util.Objects;
 @Table(name = "professor")
 public class Professor {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
-    public String firstName;
+    private String firstName;
 
     @NotBlank
-    public String lastName;
+    private String lastName;
 
     @NotBlank
     public String specialty;
 
     @NotBlank
-    String departament;
+    private String departament;
 
     @NotNull
-    @Size(min = 1, max = 100,message = "Experienta trebuie sa fie intre >=0")
-    public int yearExperience;
+    private int yearExperience;
 
     @OneToOne
     private User user;
+
+    @OneToMany(mappedBy = "professor",fetch = FetchType.LAZY)
+    private Set<Course> courses=new HashSet<>();
 
 
     @Override

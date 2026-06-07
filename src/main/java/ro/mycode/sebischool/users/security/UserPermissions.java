@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public enum UserPermissions {
     USER_EDIT("USER_EDIT"),
+    USER_VIEW("USER_VIEW"),
     USER_DELETE("USER_DELETE"),
     USER_ADD("USER_ADD"),
     COURSE_VIEW("COURSE_VIEW"),
