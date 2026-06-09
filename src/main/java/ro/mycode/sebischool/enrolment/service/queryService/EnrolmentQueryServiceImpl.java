@@ -38,5 +38,20 @@ public class EnrolmentQueryServiceImpl implements  EnrolmentQueryService {
         return enrolments.stream().map(enrolment -> StudentMapper.StudentToStudentSummaryResponse(enrolment.getStudent())).toList();
     }
 
+    @Override
+    public List<StudentSummaryResponse> getStudentsByProfessorId(Long professorId) {
+        List<Enrolment> enrolments = enrolmentRepository.findByCourseProfessorId(professorId);
+
+        return enrolments.stream()
+                .map(Enrolment::getStudent)
+                .map(student -> new StudentSummaryResponse(
+                        student.getId(),
+                        student.getUser().getFirstName(),
+                        student.getUser().getLastName(),
+                        student.getUser().getEmail(),
+                        student.getAge()
+                )).toList();
+    }
+
 
 }

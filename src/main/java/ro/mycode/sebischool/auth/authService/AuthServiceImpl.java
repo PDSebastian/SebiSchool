@@ -9,6 +9,8 @@ import ro.mycode.sebischool.auth.dtos.AuthLoginRequest;
 import ro.mycode.sebischool.auth.dtos.AuthLoginResponse;
 import ro.mycode.sebischool.auth.dtos.AuthRegisterRequest;
 import ro.mycode.sebischool.auth.exceptions.AuthValidationException;
+import ro.mycode.sebischool.professor.model.Professor;
+import ro.mycode.sebischool.professor.repository.ProfessorRepository;
 import ro.mycode.sebischool.student.model.Student;
 import ro.mycode.sebischool.student.repository.StudentRepository;
 import ro.mycode.sebischool.users.dtos.UserResponse;
@@ -25,6 +27,7 @@ import java.util.Set;
 @Component
 public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
+    private final ProfessorRepository professorRepository;
     private final StudentRepository studentRepository;
     private final AuthenticationManager authenticationManager;
     private final JWTTokenProvider jwtTokenProvider;
@@ -33,12 +36,14 @@ public class AuthServiceImpl implements AuthService {
 
     public  AuthServiceImpl(UserRepository userRepository,
                             StudentRepository studentRepository,
+                            ProfessorRepository professorRepository,
                             AuthenticationManager authenticationManager,
                             JWTTokenProvider jwtTokenProvider,
                             PasswordEncoder passwordEncoder)
     {
 
         this.userRepository = userRepository;
+        this.professorRepository = professorRepository;
         this.studentRepository = studentRepository;
         this.authenticationManager = authenticationManager;
         this.jwtTokenProvider = jwtTokenProvider;
@@ -87,6 +92,10 @@ public class AuthServiceImpl implements AuthService {
             createStudentForUser(savedUser, request);
         }
 
+        if (request.userType() == UserType.PROFESSOR) {
+            createProfessorForUser(savedUser, request);
+        }
+
         return new UserResponse(
                 savedUser.getId(),
                 savedUser.getFirstName(),
@@ -106,20 +115,41 @@ public class AuthServiceImpl implements AuthService {
         studentRepository.save(student);
     }
 
+    private void createProfessorForUser(User user, AuthRegisterRequest request) {
+        if(request.specialty()==null|| request.departament()==null) {
+            throw new AuthValidationException("speciality or departament is required");
+        }
+        Professor professor = Professor.builder()
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .specialty(request.specialty())
+                .departament(request.departament())
+                .yearExperience(request.yearExperience())
+                .user(user)
+                .build();
+
+        professorRepository.save(professor);
+
+
+    }
+
+
     private Set<UserPermissions> permissionsForType(UserType type) {
         if (type == UserType.PROFESSOR) {
             return Set.of(
                     UserPermissions.USER_VIEW,
                     UserPermissions.USER_EDIT,
                     UserPermissions.COURSE_VIEW,
-                    UserPermissions.COURSE_MANAGE
+                    UserPermissions.COURSE_MANAGE,
+                    UserPermissions.STUDENT_VIEW
             );
         }
         return Set.of(
                 UserPermissions.USER_VIEW,
                 UserPermissions.USER_EDIT,
                 UserPermissions.COURSE_VIEW,
-                UserPermissions.ENROL_SELF
+                UserPermissions.ENROL_SELF,
+                UserPermissions.STUDENT_VIEW
         );
     }
 }

@@ -25,6 +25,9 @@ public record AuthRegisterRequest(
         String password,
 
         // Obligatoriu DOAR cand userType == STUDENT. Validarea o face serviciul.
-        Integer age
+        Integer age,
+        String specialty,
+        String departament,
+        Integer yearExperience
 ) {
 }

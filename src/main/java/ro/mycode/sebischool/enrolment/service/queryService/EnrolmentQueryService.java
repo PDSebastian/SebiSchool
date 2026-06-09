@@ -9,6 +9,7 @@ public interface EnrolmentQueryService {
     List<EnrolmentResponse> getAllEnrolments();
     List<EnrolmentResponse> getAllEnrolmentsByCourseId(Long courseID);
     List<StudentSummaryResponse> getStudentsByCourseId(Long courseID);
+    List<StudentSummaryResponse> getStudentsByProfessorId(Long professorId);
 
 
 }

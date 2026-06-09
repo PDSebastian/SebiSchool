@@ -11,7 +11,8 @@ public enum UserPermissions {
     USER_ADD("USER_ADD"),
     COURSE_VIEW("COURSE_VIEW"),
     COURSE_MANAGE("COURSE_MANAGE"),
-    ENROL_SELF("ENROL_SELF");
+    ENROL_SELF("ENROL_SELF"),
+    STUDENT_VIEW("STUDENT_VIEW");
 
     private final String permission;
     public String getPermission() {
