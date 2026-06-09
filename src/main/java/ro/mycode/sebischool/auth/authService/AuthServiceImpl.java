@@ -116,12 +116,10 @@ public class AuthServiceImpl implements AuthService {
     }
 
     private void createProfessorForUser(User user, AuthRegisterRequest request) {
-        if(request.specialty()==null|| request.departament()==null) {
+        if(request.specialty()==null|| request.departament()==null|| request.yearExperience()==null) {
             throw new AuthValidationException("speciality or departament is required");
         }
         Professor professor = Professor.builder()
-                .firstName(user.getFirstName())
-                .lastName(user.getLastName())
                 .specialty(request.specialty())
                 .departament(request.departament())
                 .yearExperience(request.yearExperience())

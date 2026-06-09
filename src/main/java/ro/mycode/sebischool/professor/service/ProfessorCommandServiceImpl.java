@@ -8,8 +8,6 @@ import ro.mycode.sebischool.course.repository.CourseRepository;
 import ro.mycode.sebischool.professor.dtos.ProfessorPatchRequest;
 import ro.mycode.sebischool.professor.dtos.ProfessorRequest;
 import ro.mycode.sebischool.professor.dtos.ProfessorResponse;
-import ro.mycode.sebischool.professor.dtos.ProfessorSummaryResponse;
-import ro.mycode.sebischool.professor.exceptions.ProfessorAlreadyExistsException;
 import ro.mycode.sebischool.professor.exceptions.ProfessorNotFoundException;
 import ro.mycode.sebischool.professor.mapper.ProfessorMapper;
 import ro.mycode.sebischool.professor.model.Professor;
@@ -24,7 +22,7 @@ public class ProfessorCommandServiceImpl implements ProfessorCommandService {
     private final ProfessorRepository professorRepository;
     private final CourseRepository courseRepository;
     private final UserRepository userRepository;
-
+    Course course;
     public ProfessorCommandServiceImpl(ProfessorRepository professorRepository, UserRepository userRepository,CourseRepository courseRepository) {
         this.professorRepository = professorRepository;
         this.userRepository = userRepository;
@@ -34,16 +32,9 @@ public class ProfessorCommandServiceImpl implements ProfessorCommandService {
     @Override
     @Transactional
     public ProfessorResponse addProfessor(ProfessorRequest professorRequest) {
-        Optional<Professor> professor = professorRepository.findByFirstNameAndLastName(
-                professorRequest.firstName(), professorRequest.lastName());
+       throw  new UnsupportedOperationException("Use /api/v2/auth/register with userType=PROFESOR");
 
-        if (professor.isPresent()) {
-            throw new ProfessorAlreadyExistsException();
-        }
 
-        Professor p = ProfessorMapper.toEntity(professorRequest);
-        p = professorRepository.save(p);
-        return ProfessorMapper.toDto(p);
     }
 
     @Override
@@ -53,14 +44,13 @@ public class ProfessorCommandServiceImpl implements ProfessorCommandService {
         Professor professor = professorRepository.findById(id)
                 .orElseThrow(() -> new ProfessorNotFoundException());
 
-        professor.setFirstName(professorRequest.firstName());
-        professor.setLastName(professorRequest.lastName());
         professor.setDepartament(professorRequest.departament());
         professor.setSpecialty(professorRequest.specialty());
+        professor.setYearExperience(professorRequest.yearExperience());
 
         professorRepository.save(professor);
 
-        return ProfessorMapper.toDto(professor);
+        return ProfessorMapper.toWithCourses(professor);
     }
 
     @Override
@@ -72,7 +62,7 @@ public class ProfessorCommandServiceImpl implements ProfessorCommandService {
 
         professor.setSpecialty(professorPatchRequest.specialty());
         professorRepository.save(professor);
-        return ProfessorMapper.toDto(professor);
+        return ProfessorMapper.toWithCourses(professor);
 
 
     }
@@ -82,6 +72,9 @@ public class ProfessorCommandServiceImpl implements ProfessorCommandService {
     public void deleteProfessor(Long id) {
         Professor professor = professorRepository.findById(id)
                 .orElseThrow(() -> new ProfessorNotFoundException());
+
+        professor.getCourses();
+        course.setProfessor(null);
 
 
         professorRepository.delete(professor);
@@ -99,7 +92,7 @@ public class ProfessorCommandServiceImpl implements ProfessorCommandService {
         course.setProfessor(professor);
         professor.getCourses().add(course);
         courseRepository.save(course);
-        return ProfessorMapper.toDto(professor);
+        return ProfessorMapper.toWithCourses(professor);
     }
 
     @Override
@@ -114,6 +107,6 @@ public class ProfessorCommandServiceImpl implements ProfessorCommandService {
         course.setProfessor(null);
         professor.getCourses().remove(course);
         courseRepository.save(course);
-        return ProfessorMapper.toDto(professor);
+        return ProfessorMapper.toWithCourses(professor);
     }
 }

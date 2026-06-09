@@ -21,7 +21,7 @@ public class ProfessorQueryServiceImpl implements ProfessorQueryService{
     public List<ProfessorResponse> getAllProfessors() {
         return professorRepository.findAll()
                 .stream()
-                .map(ProfessorMapper::toDto)
+                .map(ProfessorMapper::toWithCourses)
                 .toList();
     }
 
@@ -29,13 +29,10 @@ public class ProfessorQueryServiceImpl implements ProfessorQueryService{
     public ProfessorResponse getProfessorById(Long id) {
         Professor professor = professorRepository.findById(id)
                 .orElseThrow(() -> new ProfessorNotFoundException());
-        return ProfessorMapper.toDto(professor);
+        return ProfessorMapper.toWithCourses(professor);
     }
 
-    @Override
-    public ProfessorResponse getProfessorByFirstAndLastName(String firstName, String lastName) {
-        Professor professor = professorRepository.findByFirstNameAndLastName(firstName, lastName)
-                .orElseThrow(() -> new ProfessorNotFoundException());
-        return ProfessorMapper.toDto(professor);
-    }
+
+
+
 }

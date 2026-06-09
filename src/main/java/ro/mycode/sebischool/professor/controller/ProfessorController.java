@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ro.mycode.sebischool.enrolment.service.queryService.EnrolmentQueryService;
+import ro.mycode.sebischool.professor.dtos.ProfessorPatchRequest;
 import ro.mycode.sebischool.professor.dtos.ProfessorRequest;
 import ro.mycode.sebischool.professor.dtos.ProfessorResponse;
 import ro.mycode.sebischool.professor.service.ProfessorCommandService;
@@ -17,14 +18,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v2/profesori")
 @Slf4j
-public class ProfessorControler {
+public class ProfessorController {
     private final EnrolmentQueryService enrolmentQueryService;
     private final ProfessorQueryService professorQueryService;
     private final ProfessorCommandService professorCommandService;
 
-    public ProfessorControler(ProfessorCommandService professorCommandService,
-                              ProfessorQueryService professorQueryService,
-                              EnrolmentQueryService enrolmentQueryService) {
+    public ProfessorController(ProfessorCommandService professorCommandService,
+                               ProfessorQueryService professorQueryService,
+                               EnrolmentQueryService enrolmentQueryService) {
         this.professorCommandService = professorCommandService;
         this.professorQueryService = professorQueryService;
         this.enrolmentQueryService = enrolmentQueryService;
@@ -46,9 +47,9 @@ public class ProfessorControler {
     }
 
     @PatchMapping("/{id}")
-    @PreAuthorize("hasAuthority('USER_EDIT')")
-    public ResponseEntity<ProfessorResponse> updatePatch(@PathVariable Long id, @RequestBody ProfessorRequest professorRequest) {
-        ProfessorResponse professorResponse = professorCommandService.updateProfessor(id, professorRequest);
+    @PreAuthorize("hasAuthority('USER_VIEW')")
+    public ResponseEntity<ProfessorResponse> updatePatch(@PathVariable Long id , @RequestBody ProfessorPatchRequest professorPatchRequest) {
+        ProfessorResponse professorResponse = professorCommandService.patchProfessor(id,  professorPatchRequest);
         return ResponseEntity.status(HttpStatus.OK).body(professorResponse);
     }
 
