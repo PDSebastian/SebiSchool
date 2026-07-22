@@ -118,7 +118,6 @@ class BookIntegrationTest {
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.bookName").value("Effective Java"));
 
-        // dupa adaugare avem 2 carti in DB (cea seedata + cea noua)
         assertEquals(2, bookRepository.findAll().size());
     }
 
