@@ -18,7 +18,7 @@ services:
     restart: unless-stopped
 
   sebionlineschool-app:
-    image:  sebi123q/online-school-cloud-api:sha-3cf100d
+    image:  sebi123q/online-school-cloud-api:sha-bfd1076
     container_name: online-school-spring-api
     ports:
       - "8084:8083"
